@@ -9,7 +9,6 @@
  
 
 Star::Star(GLfloatradius, GLfloat distance,
-
            GLfloat speed,  GLfloat selfSpeed,
 
            Star* parent) {
