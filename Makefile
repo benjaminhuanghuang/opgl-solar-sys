@@ -2,17 +2,16 @@ CXX = g++
 
 EXEC = solarsys.exe
 
-SOURCES = *.cpp
+SOURCES = main.cpp
 
-#INCLUDE_PATHS = -I/usr/local/include
-#LIBRARY_PATHS = -L/usr/local/lib
+INCLUDES = -I/usr/local/include
 
-LIBS = -lglfw  -lGLEW -framework OpenGL
+LIBS = -L/usr/local/lib -lglfw  -lGLEW -framework OpenGL /usr/local/lib/libSOIL.a
 
 COMPILER_FLAGS = -Wall -std=c++11
 
 all :
-	$(CXX) $(COMPILER_FLAGS) $(SOURCES) $(LIBS) -o $(EXEC)
+	$(CXX) $(COMPILER_FLAGS) $(SOURCES) $(INCLUDES) $(LIBS) -o $(EXEC)
 
 clean:
 	rm -rf *.exe *.gdb *.o
