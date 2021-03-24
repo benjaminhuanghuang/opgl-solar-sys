@@ -2,7 +2,7 @@ CXX = g++
 
 EXEC = solarsys.exe
 
-SOURCES = main.cpp #Stars.cpp SolarSystem.cpp
+SOURCES = main.cpp Stars.cpp SolarSystem.cpp
 
 #INCLUDE_PATHS = -I/usr/local/include
 #LIBRARY_PATHS = -L/usr/local/lib
