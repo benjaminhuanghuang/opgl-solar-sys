@@ -2,14 +2,14 @@ CXX = g++
 
 EXEC = solarsys.exe
 
-SOURCES = main.cpp Stars.cpp SolarSystem.cpp
+SOURCES = *.cpp
 
 #INCLUDE_PATHS = -I/usr/local/include
 #LIBRARY_PATHS = -L/usr/local/lib
 
 LIBS = -lglfw  -lGLEW -framework OpenGL
 
-COMPILER_FLAGS = -Wall
+COMPILER_FLAGS = -Wall -std=c++11
 
 all :
 	$(CXX) $(COMPILER_FLAGS) $(SOURCES) $(LIBS) -o $(EXEC)

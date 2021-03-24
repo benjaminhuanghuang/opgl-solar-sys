@@ -3,7 +3,9 @@
 
 #include <GL/glew.h>
 
-#include "Stars.h"
+#include "Star.h"
+#include "Planet.h"
+#include "LightPlanet.h"
 
 #define STARS_NUM 10
 
@@ -11,7 +13,6 @@ class SolarSystem
 {
 public:
   SolarSystem();
-
   ~SolarSystem();
   void onDisplay();
   void onUpdate();
