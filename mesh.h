@@ -5,7 +5,10 @@
 //  Created by Keyne Kassapa on 26/5/19.
 //  Copyright © 2019 Keyne Kassapa. All rights reserved.
 //
-
+/*==================================================================
+ Mesh Class store the data of Texture Coordinates, vertices, and other information in a container. 
+ The Mesh Class creates the Vertex Buffer Object (VBO) and the Vertex Array Object (VAO).
+ ================================================================*/
 #pragma once
 
 #include <string>
