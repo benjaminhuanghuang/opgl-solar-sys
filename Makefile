@@ -2,13 +2,13 @@ CXX = g++
 
 EXEC = solarsys.exe
 
-SOURCES = main.cpp
+SOURCES = main.cpp SOIL2/*.c
 
-INCLUDES = -I/usr/local/include
+INCLUDES = -I/usr/local/include 
 
-LIBS = -L/usr/local/lib -lglfw -lglew -lassimp -framework OpenGL -framework Cocoa /usr/local/lib/libSOIL.a
+LIBS = -L/usr/local/lib -lglfw -lglew -lassimp -framework OpenGL -framework Cocoa
 
-COMPILER_FLAGS = -Wall -std=c++11
+COMPILER_FLAGS = -std=c++11
 
 all :
 	$(CXX) $(COMPILER_FLAGS) $(SOURCES) $(INCLUDES) $(LIBS) -o $(EXEC)

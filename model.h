@@ -1,3 +1,10 @@
+//
+//  model.h
+//  COSC3000
+//
+//  Created by Keyne Kassapa on 26/5/19.
+//  Copyright © 2019 Keyne Kassapa. All rights reserved.
+//
 #pragma once
 
 #include <string>
@@ -10,7 +17,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <SOIL.h>
+#include "SOIL2/SOIL2.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -19,7 +26,7 @@
 
 using namespace std;
 
-GLint TextureFromFile( const string &path, string directory );
+GLint TextureFromFile( const char* path, string directory );
 
 class Model {
 public:
@@ -38,7 +45,7 @@ private:
     string directory;
     vector<Texture> textures_loaded;
    
-    void loadModel( std::string path ) {
+    void loadModel( const string &path ) {
         
         Assimp::Importer importer;
         const aiScene *scene = importer.ReadFile( path, aiProcess_Triangulate | aiProcess_FlipUVs );
@@ -141,7 +148,7 @@ private:
     }
 };
 
-GLint TextureFromFile( const string &path, string directory ) {
+GLint TextureFromFile( const char* path, string directory ) {
     string filename = string( path );
     filename = directory + '/' + filename;
     GLuint textureID;
@@ -149,7 +156,7 @@ GLint TextureFromFile( const string &path, string directory ) {
     
     int width, height;
     
-    unsigned char *image = SOIL_load_image( filename.c_str( ), &width, &height, 0, SOIL_LOAD_RGB );
+    unsigned char *image = SOIL_load_image( filename.c_str( ), &width, &height, 0, SOIL_LOAD_AUTO );
     
     glBindTexture( GL_TEXTURE_2D, textureID );
     glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image );

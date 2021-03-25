@@ -1,4 +1,5 @@
 .DS_Store
 *.exe
 build
-
+*.exe.*
+SOIL2

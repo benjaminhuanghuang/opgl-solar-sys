@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "SOIL.h"
+#include "SOIL2/SOIL2.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -42,22 +42,20 @@ GLfloat speed = 1.0f;
 
 int main()
 {
-
     bool move = true;
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);   // For Mac
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "learn Opengl", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Opengl Solar System", nullptr, nullptr);
 
     if (nullptr == window)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
-
         return EXIT_FAILURE;
     }
 
@@ -381,7 +379,6 @@ int main()
 
 void DoMovement()
 {
-
     if (keys[GLFW_KEY_W] || keys[GLFW_KEY_UP])
     {
         camera.ProcessKeyboard(FORWARD, deltaTime);
