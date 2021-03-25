@@ -6,7 +6,7 @@ SOURCES = main.cpp
 
 INCLUDES = -I/usr/local/include
 
-LIBS = -L/usr/local/lib -lglfw  -lGLEW -framework OpenGL /usr/local/lib/libSOIL.a
+LIBS = -L/usr/local/lib -lglfw -lglew -lassimp -framework OpenGL -framework Cocoa /usr/local/lib/libSOIL.a
 
 COMPILER_FLAGS = -Wall -std=c++11
 

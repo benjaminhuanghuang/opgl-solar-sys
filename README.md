@@ -17,6 +17,9 @@ https://github.com/kbranigan/Simple-OpenGL-Image-Library
   cp lib/libSOIL.a /usr/local/lib/
   cp src/SOIL.h /usr/local/include/
 ```
+## Assimp(Open Asset Import Library) 
+Assimp is a portable Open-Source library to import various well-known 3D model formats in a uniform manner.
+
 
 ## GLM (OpenGL Mathematics)
 https://glm.g-truc.net/0.9.9/index.html

@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.14)
+
+project(opglsolar.exe VERSION 1.0.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(OPENGL REQUIRED)
+find_library(COCOA_LIBRARY Cocoa REQUIRED)
+
+
+include_directories(/usr/local/include)
+link_directories(/usr/local/lib)
+set(SOIL_LIBRARY "/usr/local/lib/libSOIL.a")
+#=================== INCLUSION OF Project Files ================#
+
+
+add_executable(${CMAKE_PROJECT_NAME} main.cpp)
+
+#===================== LINKING LIBRARIES =======================#          
+target_link_libraries(${CMAKE_PROJECT_NAME}
+                        glew
+                        GLFW
+                        Assimp
+                        ${COCOA_LIBRARY}
+                        ${SOIL_LIBRARY}
+                        ${OPENGL_LIBRARY}
+                       )
