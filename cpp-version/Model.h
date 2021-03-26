@@ -21,17 +21,19 @@
 class Model
 {
 public:
-  Model(const std::string &path) {}
+  Model(const std::string &objFile, const std::string &textureFile){}
+  ~Model() {}
 
   void Draw(Shader shader) {}
 
-private:
-  std::vector<Mesh> mMeshes;
-  std::string mDirectory;
-  std::vector<Texture> mTextures;
+  void LoadMesh(const std::string &fileName);
 
-  void LoadModel(const std::string &path);
-  void ProcessNode(aiNode *node, const aiScene *scene);
-  Mesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
-  std::vector<Texture> LoadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
+  void LoadTexture(const std::string &fileName);
+
+  void Unload(){}
+private:
+  Mesh *mMesh;
+  Texture *mTexture;
+  // Name of shader specified by mesh
+  Shader mShaderName;
 };

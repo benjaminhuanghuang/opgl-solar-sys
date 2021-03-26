@@ -1,10 +1,9 @@
-#ifndef GLSOLARSYSTEM_STATICSHADER_H
-#define GLSOLARSYSTEM_STATICSHADER_H
+#pragma once
 
 #include "Shader.h"
-#include "../entity/Camera.h"
-#include "../util/Math.h"
-#include "../entity/Light.h"
+#include "Camera.h"
+#include "Math.h"
+#include "Light.h"
 
 class PlanetShader : public Shader {
 
@@ -30,6 +29,3 @@ private:
     GLint locationReflectivity;
 
 };
-
-
-#endif //GLSOLARSYSTEM_STATICSHADER_H
