@@ -1,5 +1,4 @@
-#ifndef GLSOLARSYSTEM_DISPLAY_H
-#define GLSOLARSYSTEM_DISPLAY_H
+#pragma once
 
 #include <string>
 
@@ -32,5 +31,3 @@ private:
     void initGlew();
     void initOpenglFlags();
 };
-
-#endif //GLSOLARSYSTEM_DISPLAY_H

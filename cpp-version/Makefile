@@ -1,6 +1,6 @@
 INCLUDES = -I/usr/local/include -Ilib/imgui -Ilib/stb_image
 
-LIBS = -L/usr/local/lib -lglfw  -lGLEW -framework OpenGL
+LIBS = -L/usr/local/lib -lglfw  -lGLEW -lassimp -framework OpenGL
 
 FILES = lib/imgui/*.cpp lib/stb_image/stb_image.cpp main.cpp SolarSystem.cpp Display.cpp Gui.cpp InputHandler.cpp
 

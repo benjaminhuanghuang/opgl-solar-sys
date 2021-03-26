@@ -1,5 +1,4 @@
-#ifndef GLSOLARSYSTEM_GUI_H
-#define GLSOLARSYSTEM_GUI_H
+#pragma once
 
 #include "Display.h"
 #include "lib/imgui/imgui.h"
@@ -63,6 +62,3 @@ private:
     void displayInfoWindow();
 
 };
-
-
-#endif //GLSOLARSYSTEM_GUI_H

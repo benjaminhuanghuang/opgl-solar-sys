@@ -1,5 +1,4 @@
-#ifndef GLSOLARSYSTEM_ENTITY_H
-#define GLSOLARSYSTEM_ENTITY_H
+#pragma once
 
 #include "../model/TexturedModel.h"
 #include "Camera.h"
@@ -38,5 +37,3 @@ protected:
     float scale;
 };
 
-
-#endif //GLSOLARSYSTEM_ENTITY_H

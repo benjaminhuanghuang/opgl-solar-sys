@@ -1,5 +1,4 @@
 #include "SolarSystem.h"
-#include "Res.h"
 
 SolarSystem::SolarSystem()
 {
@@ -127,8 +126,7 @@ void SolarSystem::updatePlanetSelfRotation(float time)
 
 void SolarSystem::updateCameraPosition()
 {
-
-  //UPDATE COLLISION WITH SUN
+  // UPDATE COLLISION WITH SUN
   // if (sun->isCameraColliding(camera))
   // {
 

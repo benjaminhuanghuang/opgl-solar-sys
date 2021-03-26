@@ -1,5 +1,4 @@
-#ifndef GLSOLARSYSTEM_INPUTHANDLER_H
-#define GLSOLARSYSTEM_INPUTHANDLER_H
+#pragma once
 
 #include <GLFW/glfw3.h>
 
@@ -16,5 +15,3 @@ public:
     static int getMouseX();
     static int getMouseY();
 };
-
-#endif //GLSOLARSYSTEM_INPUTHANDLER_H

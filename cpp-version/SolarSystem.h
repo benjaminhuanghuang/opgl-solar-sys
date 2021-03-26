@@ -1,25 +1,8 @@
-#ifndef GLSOLARSYSTEM_SOLARSYSTEM_H
-#define GLSOLARSYSTEM_SOLARSYSTEM_H
+#pragma once
 
 #include "Display.h"
 #include "Gui.h"
-// #include "../model/Loader.h"
-// #include "../shader/SunShader.h"
-// #include "../shader/PlanetShader.h"
-// #include "../shader/RegularShader.h"
-// #include "Renderer.h"
-// #include "../entity/planets/Mercury.h"
-// #include "../entity/planets/Sun.h"
-// #include "../entity/planets/Venus.h"
-// #include "../entity/planets/Earth.h"
-// #include "../entity/planets/Mars.h"
-// #include "../entity/planets/Jupiter.h"
-// #include "../entity/planets/Saturn.h"
-// #include "../entity/planets/Uranus.h"
-// #include "../entity/planets/Neptune.h"
-// #include "../entity/Skybox.h"
-// #include "../entity/planets/SaturnRings.h"
-
+#include "Camera.h"
 
 class SolarSystem {
 
@@ -59,7 +42,7 @@ private:
     // Neptune* neptune = nullptr;
 
 
-    // Camera* camera = nullptr;
+    Camera* camera = nullptr;
     // Skybox* skybox = nullptr;
 
   
@@ -79,5 +62,3 @@ private:
     void renderPlanetsAndMoons();
     void updateAndRenderGui();
 };
-
-#endif //GLSOLARSYSTEM_SOLARSYSTEM_H

@@ -1,43 +1,41 @@
-#ifndef GLSOLARSYSTEM_SHADER_H
-#define GLSOLARSYSTEM_SHADER_H
-
-#include "../util/Util.h"
-
-#include <string>
+#pragma once
 
 #include <GL/glew.h>
+#include <string>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-class Shader {
-
+class Shader
+{
 public:
-    Shader(const std::string& vertexPath, const std::string& fragmentPath);
-    virtual ~Shader();
-
-    virtual void bindAttributes() = 0;
-    virtual void getAllUniformLocations() = 0;
-
-    void enable();
-    void disable();
-
-protected:
-    GLint getUniformLocation(const std::string& uniformName);
-    void bindAttribute(GLint attribute, const std::string& variableName);
-
-    void loadFloat(GLint location, float value);
-    void loadVector(GLint location, const glm::vec3& vector);
-    void loadBoolean(GLint location, bool value);
-    void loadMatrix(GLint location, const glm::mat4& matrix);
+  Shader();
+  ~Shader();
+  // Load the vertex/fragment shaders with the given names
+  bool Load(const std::string &vertName, const std::string &fragName);
+  void Unload();
+  // Set this as the active shader program
+  void SetActive();
+  // Sets a Matrix uniform
+  void SetMatrixUniform(const char *name, const glm::mat4& matrix);
+  // Sets a Vector3 uniform
+  void SetVectorUniform(const char *name, const glm::vec3& vector);
+  // Sets a float uniform
+  void SetFloatUniform(const char *name, float value);
 
 private:
-    GLuint programID;
-    GLuint vertexShaderID;
-    GLuint fragmentShaderID;
+  // Tries to compile the specified shader
+  bool CompileShader(const std::string &fileName,
+                     GLenum shaderType,
+                     GLuint &outShader);
 
-    static GLuint loadShader(const std::string& path, GLuint type);
-    void loadProgram();
+  // Tests whether shader compiled successfully
+  bool IsCompiled(GLuint shader);
+  // Tests whether vertex/fragment programs link
+  bool IsValidProgram();
+
+private:
+  // Store the shader object IDs
+  GLuint mVertexShader;
+  GLuint mFragShader;
+  GLuint mShaderProgram;
 };
-
-
-#endif //GLSOLARSYSTEM_SHADER_H

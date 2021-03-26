@@ -1,29 +1,25 @@
-#ifndef GLSOLARSYSTEM_TEXTURE_H
-#define GLSOLARSYSTEM_TEXTURE_H
+#pragma once
 
-#include <GL/glew.h>
+#include <string>
 
-class Texture {
-
+class Texture
+{
 public:
-    Texture(GLuint textureID);
+  Texture();
+  ~Texture();
 
-    GLuint getTextureID() const;
+  bool Load(const std::string &fileName);
+  void Unload();
 
-    float getShineDamper() const;
+  void SetActive();
 
-    void setShineDamper(float shineDamper);
-
-    float getReflectivity() const;
-
-    void setReflectivity(float reflectivity);
+  int GetWidth() const { return mWidth; }
+  int GetHeight() const { return mHeight; }
 
 private:
-    GLuint textureID;
-    float shineDamper = 1;
-    float reflectivity = 0;
-
+  // OpenGL ID of this texture
+  unsigned int mTextureID;
+  // Width/height of the texture
+  int mWidth;
+  int mHeight;
 };
-
-
-#endif //GLSOLARSYSTEM_TEXTURE_H

@@ -88,7 +88,9 @@ void Display::update()
     glfwPollEvents();
   }
   else
+  {
     running = false;
+  }
 }
 
 bool Display::isRunning()
