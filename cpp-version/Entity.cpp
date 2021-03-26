@@ -1,5 +1,5 @@
 #include "Entity.h"
-#include "../util/Constants.h"
+#include "Constants.h"
 
 Entity::Entity(const TexturedModel& texturedModel, const glm::vec3 &position, float rotX, float rotY, float rotZ, float scale)
         : texturedModel(texturedModel), position(position), rotX(rotX), rotY(rotY), rotZ(rotZ), scale(scale) {}

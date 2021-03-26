@@ -1,8 +1,8 @@
 #ifndef GLSOLARSYSTEM_CAMERA_H
 #define GLSOLARSYSTEM_CAMERA_H
 
-#include "../input/InputHandler.h"
-#include "../util/Constants.h"
+#include "InputHandler.h"
+#include "Constants.h"
 
 #include <glm/glm.hpp>
 

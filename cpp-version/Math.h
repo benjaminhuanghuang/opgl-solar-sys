@@ -1,7 +1,7 @@
 #ifndef GLSOLARSYSTEM_MATH_H
 #define GLSOLARSYSTEM_MATH_H
 
-#include "../entity/Camera.h"
+#include "Camera.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

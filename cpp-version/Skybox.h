@@ -6,15 +6,14 @@
 #include "../model/Loader.h"
 #include "../model/TexturedModel.h"
 
-class Skybox : public Entity{
+class Skybox : public Entity
+{
 public:
-    Skybox(Loader* loader, Camera* camera);
-    void update();
+  Skybox(Loader *loader, Camera *camera);
+  void update();
 
 private:
-    Camera* camera;
-
+  Camera *camera;
 };
-
 
 #endif //GLSOLARSYSTEM_SKYBOX_H

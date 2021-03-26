@@ -11,26 +11,26 @@
 #include <GL/glew.h>
 #include <glm/gtc/matrix_transform.hpp>
 
-class Renderer {
+class Renderer
+{
 
 public:
-    Renderer(Display* display, SunShader* sunShader, PlanetShader* planetShader, RegularShader* skyboxShader);
+  Renderer(Display *display, SunShader *sunShader, PlanetShader *planetShader, RegularShader *skyboxShader);
 
-    void render(Entity* entity);
+  void render(Entity *entity);
 
 private:
-    static constexpr float FOV = 70;
-    static constexpr float NEAR_PLANE = 0.1f;
-    static constexpr float FAR_PLANE = 4000.0f;
-    glm::mat4 projection;
+  static constexpr float FOV = 70;
+  static constexpr float NEAR_PLANE = 0.1f;
+  static constexpr float FAR_PLANE = 4000.0f;
+  glm::mat4 projection;
 
-    Display* display;
-    SunShader* sunShader;
-    PlanetShader* planetShader;
-    RegularShader* skyboxShader;
+  Display *display;
+  SunShader *sunShader;
+  PlanetShader *planetShader;
+  RegularShader *skyboxShader;
 
-    void createProjectionMatrix();
+  void createProjectionMatrix();
 };
-
 
 #endif //GLSOLARSYSTEM_RENDERER_H

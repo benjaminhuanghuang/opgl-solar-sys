@@ -1,6 +1,4 @@
 #include "SolarSystem.h"
-#include "AudioMaster.h"
-#include "AudioSource.h"
 
 int main()
 {
