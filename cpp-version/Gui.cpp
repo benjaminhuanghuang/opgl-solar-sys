@@ -197,7 +197,7 @@ void Gui::button(const std::string& label, const std::string& info, bool* value)
     else
         *value = false;
     ImGui::SameLine();
-    ImGui::Text(info.c_str());
+    ImGui::Text("%s", info.c_str());
 }
 
 FocusState Gui::getFocusState() const {

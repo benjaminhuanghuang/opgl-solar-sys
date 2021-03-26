@@ -6,7 +6,7 @@
             "name": "(lldb) Launch exe",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceRoot}/solarsys.exe",
+            "program": "${workspaceRoot}/cpp-version/solar.exe",
             "args": [],
             "cwd": "${workspaceRoot}",
             //"preLaunchTask": "cmake",
