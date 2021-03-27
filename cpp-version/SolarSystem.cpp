@@ -56,6 +56,10 @@ void SolarSystem::initEntities()
   // planets.push_back(uranus);
   // neptune = new Neptune(loader);
   // planets.push_back(neptune);
+
+
+
+  
 }
 
 void SolarSystem::initCameraAndSkybox()

@@ -1,12 +1,8 @@
-#ifndef GLSOLARSYSTEM_RENDERER_H
-#define GLSOLARSYSTEM_RENDERER_H
+#pragma once
 
 #include "Display.h"
 // #include "../entity/Entity.h"
-// #include "../shader/SunShader.h"
-// #include "../shader/PlanetShader.h"
 #include "Math.h"
-// #include "../shader/RegularShader.h"
 
 #include <GL/glew.h>
 #include <glm/gtc/matrix_transform.hpp>
@@ -33,5 +29,3 @@ private:
 
   void createProjectionMatrix();
 };
-
-#endif //GLSOLARSYSTEM_RENDERER_H

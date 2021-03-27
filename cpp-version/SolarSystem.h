@@ -3,6 +3,7 @@
 #include "Display.h"
 #include "Gui.h"
 #include "Camera.h"
+#include "Entity.h"
 
 class SolarSystem {
 
@@ -16,12 +17,11 @@ public:
     Display *getDisplay() const;
 
 private:
-    //std::vector<Entity*> planets;
+    std::vector<Entity*> planets;
 
     Display* display = nullptr;
     Gui* gui = nullptr;
 
-    // Loader* loader = nullptr;
     // SunShader* sunShader = nullptr;
     // PlanetShader* planetShader = nullptr;
     // RegularShader* regularShader = nullptr;
@@ -31,15 +31,9 @@ private:
     // Light* sunLight = nullptr;
     // Sun* sun = nullptr;
 
-    // Mercury* mercury = nullptr;
-    // Venus* venus = nullptr;
-    // Earth* earth = nullptr;
-    // Mars* mars = nullptr;
-    // Jupiter* jupiter = nullptr;
-    // Saturn* saturn = nullptr;
-    // SaturnRings* saturnRings = nullptr;
-    // Uranus* uranus = nullptr;
-    // Neptune* neptune = nullptr;
+
+    Earth* earth = nullptr;
+    
 
 
     Camera* camera = nullptr;

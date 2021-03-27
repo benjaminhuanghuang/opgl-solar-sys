@@ -2,7 +2,7 @@
 #include "Util.h"
 #include "Mesh.h"
 
-Mesh* OBJLoader::LoadMesh(std::string const &filename)
+Mesh* ObjLoader::LoadMesh(std::string const &filename)
 {
   std::ifstream fin(filename.c_str());
 
@@ -65,15 +65,15 @@ Mesh* OBJLoader::LoadMesh(std::string const &filename)
     std::vector<std::string> v2 = Util::split(face[2], '/');
     std::vector<std::string> v3 = Util::split(face[3], '/');
 
-    processVertex(v1, positions, texCoords, normals, vertices, indices);
-    processVertex(v2, positions, texCoords, normals, vertices, indices);
-    processVertex(v3, positions, texCoords, normals, vertices, indices);
+    ProcessVertex(v1, positions, texCoords, normals, vertices, indices);
+    ProcessVertex(v2, positions, texCoords, normals, vertices, indices);
+    ProcessVertex(v3, positions, texCoords, normals, vertices, indices);
   }
 
   return new Mesh(vertices.data(), vertices.size(), indices.data(), indices.size());
 }
 
-void OBJLoader::processVertex(std::vector<std::string> const &vertexData,
+void ObjLoader::ProcessVertex(std::vector<std::string> const &vertexData,
                               std::vector<glm::vec3> const &positions,
                               std::vector<glm::vec2> const &texCoords,
                               std::vector<glm::vec3> const &normals,

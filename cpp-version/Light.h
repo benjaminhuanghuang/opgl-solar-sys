@@ -1,5 +1,4 @@
-#ifndef GLSOLARSYSTEM_LIGHT_H
-#define GLSOLARSYSTEM_LIGHT_H
+#pragma once
 
 #include <glm/glm.hpp>
 
@@ -20,5 +19,3 @@ private:
     glm::vec3 color;
 };
 
-
-#endif //GLSOLARSYSTEM_LIGHT_H

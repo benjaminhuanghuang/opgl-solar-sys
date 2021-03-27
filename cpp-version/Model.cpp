@@ -5,12 +5,6 @@
 
 using namespace std;
 
-union Vertex
-{
-  float f;
-  uint8_t b[4];
-};
-
 Model::Model(const std::string &objFile, const std::string &textureFile)
 {
   LoadMesh(objFile);

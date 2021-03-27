@@ -21,16 +21,17 @@
 class Model
 {
 public:
-  Model(const std::string &objFile, const std::string &textureFile){}
-  ~Model() {}
+  Model(const std::string &objFile, const std::string &textureFile);
+  ~Model();
 
-  void Draw(Shader shader) {}
+  void Draw(Shader shader);
 
   void LoadMesh(const std::string &fileName);
 
   void LoadTexture(const std::string &fileName);
 
-  void Unload(){}
+  void Unload();
+
 private:
   Mesh *mMesh;
   Texture *mTexture;
