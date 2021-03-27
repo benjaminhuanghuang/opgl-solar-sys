@@ -24,49 +24,45 @@ bool Renderer::Initialize(int screenWidth, int screenHeight, const std::string &
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  GLFWwindow *window = glfwCreateWindow(screenWidth, screenHeight, title.c_str(), NULL, NULL);
-  if (!window)
+  mWindow = glfwCreateWindow(screenWidth, screenHeight, title.c_str(), NULL, NULL);
+  if (!mWindow)
   {
     glfwTerminate();
-    exit(EXIT_FAILURE);
+    return false;
   }
 
-  glfwMakeContextCurrent(window);
+  glfwMakeContextCurrent(mWindow);
 
   // Initialize GLEW
   glewExperimental = true; // Needed for core profile
   if (glewInit() != GLEW_OK)
   {
     glfwTerminate();
-    exit(EXIT_FAILURE);
+    return false;
   }
   glfwGetFramebufferSize(mWindow, &mScreenWidth, &mScreenHeight);
 
   glViewport(0, 0, mScreenWidth, mScreenHeight);
+
+  glfwSetKeyCallback(mWindow, InputHandler::keyCallback);
+  glfwSetMouseButtonCallback(mWindow, InputHandler::mouseButtonCallback);
+  glfwSetCursorPosCallback(mWindow, InputHandler::cursorPositionCallback);
+
   // Blend
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   //
   glEnable(GL_DEPTH_TEST);
-
-  // Initialize GLEW
-  glewExperimental = GL_TRUE;
-  if (glewInit() != GLEW_OK)
-  {
-    std::cout << "Failed to initialize GLEW.";
-    return false;
-  }
-
   // On some platforms, GLEW will emit a benign error code,
   // so clear it
   glGetError();
 
   // Make sure we can create/compile shaders
-  if (!LoadShaders())
-  {
-    std::cout << "Failed to load shaders.";
-    return false;
-  }
+  // if (!LoadShaders())
+  // {
+  //   std::cout << "Failed to load shaders.";
+  //   return false;
+  // }
 
   // Create quad for drawing sprites
   CreateSpriteVerts();
@@ -96,9 +92,9 @@ void Renderer::Draw()
   glEnable(GL_DEPTH_TEST);
   glDisable(GL_BLEND);
   // Set the mesh shader active
-  mMeshShader->SetActive();
+  //mMeshShader->SetActive();
   // Update view-projection matrix
-  mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+  //mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
   // // Update lighting uniforms
   // SetLightUniforms(mMeshShader);
   // for (auto mc : mMeshComps)
@@ -115,8 +111,8 @@ void Renderer::Draw()
   glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
   // Set shader/vao as active
-  mSpriteShader->SetActive();
-  mSpriteVerts->SetActive();
+  //mSpriteShader->SetActive();
+  //mSpriteVerts->SetActive();
   // for (auto sprite : mSprites)
   // {
   //   sprite->Draw(mSpriteShader);
@@ -180,4 +176,3 @@ void Renderer::CreateSpriteVerts()
 
   mSpriteVerts = new Mesh(vertices, 4, indices, 6);
 }
-

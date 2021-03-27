@@ -8,8 +8,7 @@ FILES = lib/imgui/*.cpp lib/stb_image/stb_image.cpp main.cpp SolarSystem.cpp Ren
 CXXFLAGS += -std=c++11 -g
 
 solar : $(FILES)
-	g++ $^ $(CXXFLAGS) $(INCLUDES) $(LIBS) -o $@.exe &&\
-	./solar.exe
+	g++ $^ $(CXXFLAGS) $(INCLUDES) $(LIBS) -o $@.exe
 
 clean:
 	rm -rf *.exe
