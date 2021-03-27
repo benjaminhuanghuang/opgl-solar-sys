@@ -1,55 +1,183 @@
+#include <iostream>
 #include "Renderer.h"
+#include "Math.h"
+#include "Shader.h"
+#include "Mesh.h"
 
-Renderer::Renderer(Display *display, SunShader *sunShader, PlanetShader *planetShader, RegularShader *skyboxShader)
-    : display(display), sunShader(sunShader), planetShader(planetShader), skyboxShader(skyboxShader)
+Renderer::Renderer(SolarSystem *solar) : mSolarSys(solar), mSpriteShader(nullptr), mMeshShader(nullptr)
 {
-
-    createProjectionMatrix();
-
-    sunShader->enable();
-    sunShader->loadProjectionMatrix(projection);
-    sunShader->disable();
-
-    planetShader->enable();
-    planetShader->loadProjectionMatrix(projection);
-    planetShader->disable();
-
-    skyboxShader->enable();
-    skyboxShader->loadProjectionMatrix(projection);
-    skyboxShader->disable();
 }
 
-void Renderer::render(Entity *entity)
+Renderer::~Renderer()
 {
-
-    TexturedModel texturedModel = entity->getTexturedModel();
-    RawModel rawModel = texturedModel.getRawModel();
-
-    glBindVertexArray(rawModel.getVaoID());
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glEnableVertexAttribArray(2);
-
-    glm::mat4 transform = Math::createTransformationMatrix(entity->getPosition(), entity->getRotX(), entity->getRotY(), entity->getRotZ(), entity->getScale());
-    sunShader->loadTransformMatrix(transform);
-    planetShader->loadTransformMatrix(transform);
-    skyboxShader->loadTransformMatrix(transform);
-    Texture texture = texturedModel.getTexture();
-    planetShader->loadShineVariables(texture.getShineDamper(), texture.getReflectivity());
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texturedModel.getTexture().getTextureID());
-    glDrawElements(GL_TRIANGLES, rawModel.getVertexCount(), GL_UNSIGNED_INT, 0);
-
-    glDisableVertexAttribArray(0);
-    glDisableVertexAttribArray(1);
-    glDisableVertexAttribArray(2);
-    glBindVertexArray(0);
 }
 
-void Renderer::createProjectionMatrix()
+bool Renderer::Initialize(int screenWidth, int screenHeight, const std::string &title)
 {
-    float aspectRatio = static_cast<float>(display->getWidth()) / static_cast<float>(display->getHeight());
+  if (!glfwInit())
+  {
+    std::cout << "Failed to initialize GLFW." << std::endl;
+    return false;
+  }
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    projection = glm::perspective(FOV, aspectRatio, NEAR_PLANE, FAR_PLANE);
+  GLFWwindow *window = glfwCreateWindow(screenWidth, screenHeight, title.c_str(), NULL, NULL);
+  if (!window)
+  {
+    glfwTerminate();
+    exit(EXIT_FAILURE);
+  }
+
+  glfwMakeContextCurrent(window);
+
+  // Initialize GLEW
+  glewExperimental = true; // Needed for core profile
+  if (glewInit() != GLEW_OK)
+  {
+    glfwTerminate();
+    exit(EXIT_FAILURE);
+  }
+  glfwGetFramebufferSize(mWindow, &mScreenWidth, &mScreenHeight);
+
+  glViewport(0, 0, mScreenWidth, mScreenHeight);
+  // Blend
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  //
+  glEnable(GL_DEPTH_TEST);
+
+  // Initialize GLEW
+  glewExperimental = GL_TRUE;
+  if (glewInit() != GLEW_OK)
+  {
+    std::cout << "Failed to initialize GLEW.";
+    return false;
+  }
+
+  // On some platforms, GLEW will emit a benign error code,
+  // so clear it
+  glGetError();
+
+  // Make sure we can create/compile shaders
+  if (!LoadShaders())
+  {
+    std::cout << "Failed to load shaders.";
+    return false;
+  }
+
+  // Create quad for drawing sprites
+  CreateSpriteVerts();
+
+  return true;
 }
+
+void Renderer::Shutdown()
+{
+  glfwDestroyWindow(mWindow);
+  glfwTerminate();
+}
+
+void Renderer::UnloadData()
+{
+}
+
+void Renderer::Draw()
+{
+  // Set the clear color to light grey
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  // Clear the color buffer
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  // Draw mesh components
+  // Enable depth buffering/disable alpha blend
+  glEnable(GL_DEPTH_TEST);
+  glDisable(GL_BLEND);
+  // Set the mesh shader active
+  mMeshShader->SetActive();
+  // Update view-projection matrix
+  mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+  // // Update lighting uniforms
+  // SetLightUniforms(mMeshShader);
+  // for (auto mc : mMeshComps)
+  // {
+  //   mc->Draw(mMeshShader);
+  // }
+
+  // Draw all sprite components
+  // Disable depth buffering
+  glDisable(GL_DEPTH_TEST);
+  // Enable alpha blending on the color buffer
+  glEnable(GL_BLEND);
+  glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
+  glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+
+  // Set shader/vao as active
+  mSpriteShader->SetActive();
+  mSpriteVerts->SetActive();
+  // for (auto sprite : mSprites)
+  // {
+  //   sprite->Draw(mSpriteShader);
+  // }
+
+  // Swap the buffers
+  glfwSwapBuffers(mWindow);
+  glfwPollEvents();
+}
+
+bool Renderer::LoadShaders()
+{
+  //======= 2D shader, view, proj
+  mSpriteShader = new Shader();
+  if (!mSpriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
+  {
+    return false;
+  }
+  mSpriteShader->SetActive();
+
+  glm::mat4 viewProj = Math::CreateSimpleViewProj(mScreenWidth, mScreenHeight);
+  mSpriteShader->SetMatrixUniform("uViewProj", viewProj);
+
+  //======== 3D shader, view, proj
+  mMeshShader = new Shader();
+  if (!mMeshShader->Load("Shaders/Phong.vert", "Shaders/Phong.frag"))
+  {
+    return false;
+  }
+
+  mMeshShader->SetActive();
+
+  //== Set the view-projection matrix
+  mView = glm::lookAt(glm::vec3(0, 0, 0), // eye is at (4,3,3), in World Space
+                      glm::vec3(0, 0, 0), // looks at target at origin
+                      glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
+  );
+
+  // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+  mProjection = glm::perspective(glm::radians(45.0f), (float)mScreenWidth / (float)mScreenHeight, 25.0f, 100.0f);
+
+  mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+  return true;
+}
+
+/*
+	2D sprite verts
+*/
+void Renderer::CreateSpriteVerts()
+{
+  float vertices[] = {
+      -0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 0.f, // top left
+      0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 0.f,  // top right
+      0.5f, -0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 1.f, // bottom right
+      -0.5f, -0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 1.f // bottom left
+  };
+
+  unsigned int indices[] = {
+      0, 1, 2,
+      2, 3, 0};
+
+  mSpriteVerts = new Mesh(vertices, 4, indices, 6);
+}
+

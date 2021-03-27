@@ -9,37 +9,50 @@ static bool mousebuttons[MAX_MOUSEBUTTONS] = {false};
 static int mouse_x;
 static int mouse_y;
 
-bool InputHandler::isKeyPressed(unsigned int key) {
-    if(key >= 0 && key < MAX_KEYS)
-        return keys[key];
-    else
-        return false;
+//===== Callbacks for glfw window
+void InputHandler::keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
+{
+  if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action)
+  {
+    glfwSetWindowShouldClose(window, GL_TRUE);
+  }
+
+  keys[key] = action != GLFW_RELEASE;
 }
 
-bool InputHandler::isMouseButtonPressed(unsigned int mousebutton) {
-    if(mousebutton >= 0 && mousebutton < MAX_MOUSEBUTTONS)
-        return mousebuttons[mousebutton];
-    else
-        return false;
+void InputHandler::mouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
+{
+  mousebuttons[button] = action != GLFW_RELEASE;
 }
 
-void InputHandler::keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods) {
-    keys[key] = action != GLFW_RELEASE;
+void InputHandler::cursorPositionCallback(GLFWwindow *window, double xpos, double ypos)
+{
+  mouse_x = xpos;
+  mouse_y = ypos;
 }
 
-void InputHandler::mouseButtonCallback(GLFWwindow *window, int button, int action, int mods) {
-    mousebuttons[button] = action != GLFW_RELEASE;
+bool InputHandler::isKeyPressed(unsigned int key)
+{
+  if (key >= 0 && key < MAX_KEYS)
+    return keys[key];
+  else
+    return false;
 }
 
-void InputHandler::cursorPositionCallback(GLFWwindow *window, double xpos, double ypos) {
-    mouse_x = xpos;
-    mouse_y = ypos;
+bool InputHandler::isMouseButtonPressed(unsigned int mousebutton)
+{
+  if (mousebutton >= 0 && mousebutton < MAX_MOUSEBUTTONS)
+    return mousebuttons[mousebutton];
+  else
+    return false;
 }
 
-int InputHandler::getMouseX() {
-    return mouse_x;
+int InputHandler::getMouseX()
+{
+  return mouse_x;
 }
 
-int InputHandler::getMouseY() {
-    return mouse_y;
+int InputHandler::getMouseY()
+{
+  return mouse_y;
 }

@@ -2,7 +2,8 @@ INCLUDES = -I/usr/local/include -Ilib/imgui -Ilib/stb_image
 
 LIBS = -L/usr/local/lib -lglfw  -lGLEW -lassimp -framework OpenGL
 
-FILES = lib/imgui/*.cpp lib/stb_image/stb_image.cpp *.cpp
+FILES = lib/imgui/*.cpp lib/stb_image/stb_image.cpp main.cpp SolarSystem.cpp Renderer.cpp InputHandler.cpp Shader.cpp \
+	Texture.cpp Util.cpp Math.cpp Mesh.cpp
 
 CXXFLAGS += -std=c++11 -g
 

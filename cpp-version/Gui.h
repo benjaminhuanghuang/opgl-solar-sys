@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Display.h"
 #include "lib/imgui/imgui.h"
 #include "lib/imgui/imgui_impl_glfw.h"
 #include "lib/imgui/imgui_impl_opengl3.h"
 
 #include <string>
+#include "Renderer.h"
 
 enum class FocusState
 {
@@ -24,7 +24,7 @@ enum class FocusState
 class Gui
 {
 public:
-  Gui(Display *display);
+  Gui(Renderer *renderer);
   virtual ~Gui();
 
   void initFrame();

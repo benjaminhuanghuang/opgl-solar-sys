@@ -4,9 +4,11 @@ int main()
 {
   SolarSystem solarSystem;
 
-  while (solarSystem.getDisplay()->isRunning())
-  {
-    solarSystem.update();
-    solarSystem.render();
-  }
+  bool success = solarSystem.Initialize();
+	if (success)
+	{
+		solarSystem.RunLoop();
+	}
+	solarSystem.Shutdown();
+	return 0;
 }

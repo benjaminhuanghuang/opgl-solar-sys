@@ -1,12 +1,12 @@
 #include "Gui.h"
 
-Gui::Gui(Display *display)
+Gui::Gui(Renderer *renderer)
 {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
   (void)io;
-  ImGui_ImplGlfw_InitForOpenGL(display->getWindow(), true);
+  ImGui_ImplGlfw_InitForOpenGL(renderer->getWindow(), true);
   ImGui_ImplOpenGL3_Init("#version 400 core");
   ImGui::StyleColorsClassic();
 }

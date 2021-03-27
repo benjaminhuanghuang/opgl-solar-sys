@@ -1,58 +1,29 @@
 #pragma once
 
-#include "Display.h"
+#include "Renderer.h"
 #include "Gui.h"
 #include "Camera.h"
 #include "Entity.h"
 
 class SolarSystem {
-
 public:
-    SolarSystem();
-    ~SolarSystem();
+	SolarSystem();
+	bool Initialize();
+	void RunLoop();
+	void Shutdown();
 
-    void update();
-    void render();
-
-    Display *getDisplay() const;
+	Renderer *GetRenderer() { return mRenderer; }
 
 private:
-    std::vector<Entity*> planets;
+	void ProcessInput();
+	void Update();
 
-    Display* display = nullptr;
-    Gui* gui = nullptr;
-
-    // SunShader* sunShader = nullptr;
-    // PlanetShader* planetShader = nullptr;
-    // RegularShader* regularShader = nullptr;
-    // Renderer* renderer = nullptr;
+	void Draw();
+	void LoadData();
+	void UnloadData();
 
 
-    // Light* sunLight = nullptr;
-    // Sun* sun = nullptr;
+	class Renderer *mRenderer;
 
-
-    Earth* earth = nullptr;
-    
-
-
-    Camera* camera = nullptr;
-    // Skybox* skybox = nullptr;
-
-  
-    void initWindow();
-    void initShaders();
-    void initRenderer();
-    void initEntities();
-    void initCameraAndSkybox();
-
-    void updatePlanetAroundSunRotation(float time);
-    void updatePlanetSelfRotation(float time);
-
-    void updateCameraPosition();
-
-    void renderRegularEntities();
-    void renderSun();
-    void renderPlanetsAndMoons();
-    void updateAndRenderGui();
+	unsigned int mTicksCount;
 };
