@@ -5,6 +5,7 @@
 #include "Planet.h"
 #include "Renderer.h"
 #include "Gui.h"
+#include "SpriteComponent.h"
 
 SolarSystem::SolarSystem() : mRenderer(nullptr)
 {
@@ -75,7 +76,10 @@ void SolarSystem::Update()
 	}
 	mTicksCount = glfwGetTime();
 
-  // Update(deltaTime);
+  for (auto entity : mEntities)
+	{
+		entity->Update(deltaTime);
+	}
 }
 
 void SolarSystem::Draw()
@@ -86,6 +90,13 @@ void SolarSystem::Draw()
 void SolarSystem::LoadData()
 {
   Planet *a = new Planet(this);
+
+
+  Entity *rader = new Entity(this);
+	rader->SetPosition(glm::vec3(375.0f, -275.0f, 0.0f));
+	rader->SetScale(0.75f);
+	SpriteComponent *sc = new SpriteComponent(rader);
+	sc->SetTexture(mRenderer->GetTexture("img/Radar.png"));
 }
 
 void SolarSystem::UnloadData()

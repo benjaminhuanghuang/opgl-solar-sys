@@ -21,4 +21,6 @@ namespace Util
   glm::mat4 CreateSimpleViewProj(float width, float height);
   
   bool NearZero(float val, float epsilon = 0.001f);
+
+  glm::mat4 CreateScale(float xScale, float yScale, float zScale);
 };

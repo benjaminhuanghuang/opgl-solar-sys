@@ -23,13 +23,13 @@ void MoveComponent::Update(float deltaTime)
   if (!Util::NearZero(mAngularSpeed))
   {
     float angle = mAngularSpeed * deltaTime;
-    mOwner->setRotZ(mOwner->getRotZ() + angle);
+    mOwner->SetRotZ(mOwner->GetRotZ() + angle);
   }
   if (!Util::NearZero(mOrbitSpeed))
   {
-    float orbitalAngle = ((Planet *)mOwner)->getOrbitAngle() + mOrbitSpeed * deltaTime;
-    ((Planet *)mOwner)->setOrbitAngle(orbitalAngle);
-    float radius = ((Planet *)mOwner)->getOrbitRadius();
-    mOwner->setPosition(glm::vec3(Constants::ORIGIN_X + radius * glm::cos(orbitalAngle), 0, Constants::ORIGIN_Z + radius * glm::sin(orbitalAngle)));
+    float orbitalAngle = ((Planet *)mOwner)->GetOrbitAngle() + mOrbitSpeed * deltaTime;
+    ((Planet *)mOwner)->SetOrbitAngle(orbitalAngle);
+    float radius = ((Planet *)mOwner)->GetOrbitRadius();
+    mOwner->SetPosition(glm::vec3(Constants::ORIGIN_X + radius * glm::cos(orbitalAngle), 0, Constants::ORIGIN_Z + radius * glm::sin(orbitalAngle)));
   }
 }

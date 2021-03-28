@@ -5,12 +5,12 @@
 // Released under the BSD License
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
-
+#include "Renderer.h"
 #include "Planet.h"
 #include "MeshComponent.h"
 #include "MoveComponent.h"
 #include "SolarSystem.h"
-#include "Renderer.h"
+
 
 Planet::Planet(SolarSystem *solar) : Entity(solar)
 {
@@ -19,12 +19,12 @@ Planet::Planet(SolarSystem *solar) : Entity(solar)
   // MeshComponent
   MeshComponent *mesh = new MeshComponent(this);
   mesh->SetVertexArray(GetSolarSystem()->GetRenderer()->GetVertexArray("obj/sphere.obj"));
-  mesh->SetVertexArray(GetSolarSystem()->GetRenderer()->GetTexture("img/earthTexture.jpeg"));
+  mesh->SetTexture(GetSolarSystem()->GetRenderer()->GetTexture("img/earthTexture.jpeg"));
 
   // Create a move component, and set  speed
   MoveComponent *move = new MoveComponent(this);
   move->SetAngularSpeed(5.0f);
-  move->SetOrbitSpeed(5.0f);
+  move->SetOrbitSpeed(0.0f);
 }
 
 Planet::~Planet()

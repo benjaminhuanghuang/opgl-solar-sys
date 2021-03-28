@@ -26,47 +26,47 @@ public:
 
   SolarSystem *GetSolarSystem() { return mSolarSys; }
 
-  const glm::vec3 &getPosition() const
+  const glm::vec3 &GetPosition() const
   {
     return mPosition;
   }
-  void setPosition(const glm::vec3 &pos)
+  void SetPosition(const glm::vec3 &pos)
   {
     mPosition = pos;
   }
 
-  float getRotX() const
+  float GetRotX() const
   {
     return mRotX;
   }
-  void setRotX(float rotX)
+  void SetRotX(float rotX)
   {
     mRotX = rotX;
   }
 
-  float getRotY() const
+  float GetRotY() const
   {
     return mRotY;
   }
-  void setRotY(float rotY)
+  void SetRotY(float rotY)
   {
     mRotY = rotY;
   }
 
-  float getRotZ() const
+  float GetRotZ() const
   {
     return mRotX;
   }
-  void setRotZ(float rotZ)
+  void SetRotZ(float rotZ)
   {
     mRotZ = rotZ;
   }
 
-  float getScale() const
+  float GetScale() const
   {
     return mScale;
   }
-  void setScale(float scale)
+  void SetScale(float scale)
   {
     mScale = scale;
   }

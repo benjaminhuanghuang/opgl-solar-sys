@@ -9,22 +9,22 @@ public:
   Planet(class SolarSystem *solar);
   ~Planet();
 
-  float getOrbitRadius() const
+  float GetOrbitRadius() const
   {
     return mOrbitRadius;
   }
 
-  void setOrbitRadius(float orbitRadius)
+  void SetOrbitRadius(float orbitRadius)
   {
     mOrbitRadius = orbitRadius;
   }
 
-  float getOrbitAngle() const
+  float GetOrbitAngle() const
   {
     return mOrbitAngle;
   }
 
-  void setOrbitAngle(float orbitAngle)
+  void SetOrbitAngle(float orbitAngle)
   {
     mOrbitAngle = orbitAngle;
   }

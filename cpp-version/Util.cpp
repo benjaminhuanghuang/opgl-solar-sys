@@ -62,4 +62,16 @@ namespace Util
   {
     return (fabs(val) <= epsilon);
   }
+
+  glm::mat4 CreateScale(float xScale, float yScale, float zScale)
+  {
+    float temp[16] =
+        {
+            xScale, 0.0f, 0.0f, 0.0f,
+            0.0f, yScale, 0.0f, 0.0f,
+            0.0f, 0.0f, zScale, 0.0f,
+            0.0f, 0.0f, 0.0f, 1.0f};
+    return glm::make_mat4(temp);
+  }
+
 };

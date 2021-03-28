@@ -2,7 +2,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "Renderer.h"
 #include "InputHandler.h"
 #include "SolarSystem.h"
 #include "Gui.h"
@@ -11,6 +10,10 @@
 #include "Texture.h"
 #include "ObjLoader.h"
 #include "VertexArray.h"
+#include "MeshComponent.h"
+#include "SpriteComponent.h"
+#include "Renderer.h"
+
 
 Renderer::Renderer(SolarSystem *solar) : mSolarSys(solar), mSpriteShader(nullptr), mMeshShader(nullptr)
 {
@@ -66,11 +69,11 @@ bool Renderer::Initialize(int screenWidth, int screenHeight, const std::string &
   glGetError();
 
   // Make sure we can create/compile shaders
-  // if (!LoadShaders())
-  // {
-  //   std::cout << "Failed to load shaders.";
-  //   return false;
-  // }
+  if (!LoadShaders())
+  {
+    std::cout << "Failed to load shaders.";
+    return false;
+  }
 
   // Create quad for drawing sprites
   CreateSpriteVerts();
@@ -99,15 +102,15 @@ void Renderer::Draw()
   glEnable(GL_DEPTH_TEST);
   glDisable(GL_BLEND);
   // Set the mesh shader active
-  //mMeshShader->SetActive();
+  mBasicMeshShader->SetActive();
   // Update view-projection matrix
-  //mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
-  // // Update lighting uniforms
+  mBasicMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+  // Update lighting uniforms
   // SetLightUniforms(mMeshShader);
-  // for (auto mc : mMeshComps)
-  // {
-  //   mc->Draw(mMeshShader);
-  // }
+  for (auto mc : mMeshComps)
+  {
+    mc->Draw(mMeshShader);
+  }
 
   // Draw all sprite components
   // Disable depth buffering
@@ -117,7 +120,8 @@ void Renderer::Draw()
   glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
   glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
-  mSolarSys->GetGui()->Draw();
+  // mSolarSys->GetGui()->Draw();
+
   // Set shader/vao as active
   //mSpriteShader->SetActive();
   //mSpriteVerts->SetActive();
@@ -131,6 +135,34 @@ void Renderer::Draw()
   glfwSwapBuffers(mWindow);
   glfwPollEvents();
 }
+
+void Renderer::AddSprite(SpriteComponent *sprite)
+{
+	// Find the insertion point in the sorted vector
+	// (The first element with a higher draw order than me)
+	int myDrawOrder = sprite->GetDrawOrder();
+	auto iter = mSprites.begin();
+	for (;
+			 iter != mSprites.end();
+			 ++iter)
+	{
+		if (myDrawOrder < (*iter)->GetDrawOrder())
+		{
+			break;
+		}
+	}
+
+	// Inserts element before position of iterator
+	mSprites.insert(iter, sprite);
+}
+
+void Renderer::RemoveSprite(SpriteComponent *sprite)
+{
+	auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
+	mSprites.erase(iter);
+}
+
+
 void Renderer::AddMeshComp(MeshComponent *mesh)
 {
 	mMeshComps.emplace_back(mesh);
@@ -201,8 +233,14 @@ bool Renderer::LoadShaders()
   {
     return false;
   }
+  //======== 3D shader, view, proj
+  mBasicMeshShader = new Shader();
+  if (!mBasicMeshShader->Load("Shaders/BasicMesh.vert", "Shaders/BasicMesh.frag"))
+  {
+    return false;
+  }
 
-  mMeshShader->SetActive();
+  mBasicMeshShader->SetActive();
 
   //== Set the view-projection matrix
   mView = glm::lookAt(glm::vec3(0, 0, 0), // eye is at (4,3,3), in World Space
@@ -213,7 +251,7 @@ bool Renderer::LoadShaders()
   // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
   mProjection = glm::perspective(glm::radians(45.0f), (float)mScreenWidth / (float)mScreenHeight, 25.0f, 100.0f);
 
-  mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+  mBasicMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
   return true;
 }
 

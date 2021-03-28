@@ -1,7 +1,9 @@
+
 #include "Shader.h"
 #include "Texture.h"
 #include <fstream>
 #include <sstream>
+
 
 Shader::Shader() : mShaderProgram(0), mVertexShader(0), mFragShader(0)
 {
