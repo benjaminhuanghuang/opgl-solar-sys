@@ -14,7 +14,7 @@ namespace Constants
   constexpr int R_URANUS = 25362 * R_SCALE;
   constexpr int R_NEPTUNE = 24622 * R_SCALE;
 
-  // 
+  //
   constexpr float D_SCALE = 4.0f / 5.0f;
   constexpr int D_FROM_EARTH_SUN = -1000 * D_SCALE;
   constexpr int D_FROM_EARTH_MERCURY = -150 * D_SCALE;
@@ -58,4 +58,22 @@ namespace Constants
   constexpr float ANGULAR_SPEED_SATURN = -1.64 * 1e-4 * ANGULAR_SPEED_SCALE;
   constexpr float ANGULAR_SPEED_URANUS = 1.04 * 1e-4 * ANGULAR_SPEED_SCALE;
   constexpr float ANGULAR_SPEED_NEPTUNE = -1.08 * 1e-4 * ANGULAR_SPEED_SCALE;
+
+
+  // Resources
+  constexpr char OBJ_SKYBOX[] = "obj/skybox.obj";
+  constexpr char OBJ_SPHERE[] = "obj/sphere.obj";
+  constexpr char OBJ_RINGS[] = "obj/rings.obj";
+
+  constexpr char TEXTURE_STARS[] = "img/starsTexture.png";
+  constexpr char TEXTURE_SUN[] = "img/sunTexture.png";
+  constexpr char TEXTURE_MERCURY[] = "img/mercuryTexture.png";
+  constexpr char TEXTURE_VENUS[] = "img/venusTexture.png";
+  constexpr char TEXTURE_EARTH[] = "img/earthTexture.jpeg";
+  constexpr char TEXTURE_MARS[] = "img/marsTexture.png";
+  constexpr char TEXTURE_JUPITER[] = "img/jupiterTexture.png";
+  constexpr char TEXTURE_SATURN[] = "img/saturnTexture.png";
+  constexpr char TEXTURE_RINGS[] = "img/ringsTexture.png";
+  constexpr char TEXTURE_URANUS[] = "img/uranusTexture.png";
+  constexpr char TEXTURE_NEPTUNE[] = "img/neptuneTexture.png";
 }

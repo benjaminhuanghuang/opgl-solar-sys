@@ -8,28 +8,28 @@
 
 #include "MoveComponent.h"
 #include "Entity.h"
+#include "Math.h"
+#include "Planet.h"
 
-MoveComponent::MoveComponent(Entity *owner, int updateOrder)
-    : Component(owner, updateOrder), mAngularSpeed(0.0f), mForwardSpeed(0.0f)
+MoveComponent::MoveComponent(Planet *owner, int updateOrder)
+    : Component(owner, updateOrder),
+      mAngularSpeed(0.0f),
+      mOrbitSpeed(0.0f)
 {
 }
 
 void MoveComponent::Update(float deltaTime)
 {
-
-  if (!glm::ne(mAngularSpeed))
+  if (!Math::NearZero(mAngularSpeed))
   {
-    Quaternion rot = mOwner->GetRotation();
     float angle = mAngularSpeed * deltaTime;
-    // Create quaternion for incremental rotation
-    // (Rotate about up axis)
-    Quaternion inc(Vector3::UnitZ, angle);
-    // Concatenate old and new quaternion
-    rot = Quaternion::Concatenate(rot, inc);
-    mOwner->SetRotation(rot);
+    mOwner->setRotZ(mOwner->getRotZ() + angle);
   }
-
-  float orbitalAngle += orbitSpeed * deltaTime;
-  float radius = mOwner-> 
-  setPosition(glm::vec3(Constants::ORIGIN_X + radius * glm::cos(orbitalAngle), 0, Constants::ORIGIN_Z + radius * glm::sin(orbitalAngle)));
+  if (!Math::NearZero(mOrbitSpeed))
+  {
+    float orbitalAngle = ((Planet *)mOwner)->getOrbitAngle() + mOrbitSpeed * deltaTime;
+    ((Planet *)mOwner)->setOrbitAngle(orbitalAngle);
+    float radius = ((Planet *)mOwner)->getOrbitRadius();
+    mOwner->setPosition(glm::vec3(Constants::ORIGIN_X + radius * glm::cos(orbitalAngle), 0, Constants::ORIGIN_Z + radius * glm::sin(orbitalAngle)));
+  }
 }

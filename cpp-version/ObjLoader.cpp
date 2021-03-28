@@ -1,8 +1,8 @@
 #include "ObjLoader.h"
 #include "Util.h"
-#include "Mesh.h"
+#include "VertexArray.h"
 
-Mesh* ObjLoader::LoadMesh(std::string const &filename)
+VertexArray* ObjLoader::LoadMesh(std::string const &filename)
 {
   std::ifstream fin(filename.c_str());
 
@@ -70,7 +70,7 @@ Mesh* ObjLoader::LoadMesh(std::string const &filename)
     ProcessVertex(v3, positions, texCoords, normals, vertices, indices);
   }
 
-  return new Mesh(vertices.data(), vertices.size(), indices.data(), indices.size());
+  return new VertexArray(vertices.data(), vertices.size(), indices.data(), indices.size());
 }
 
 void ObjLoader::ProcessVertex(std::vector<std::string> const &vertexData,

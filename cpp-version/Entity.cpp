@@ -1,6 +1,9 @@
+#include "SolarSystem.h"
 #include "Entity.h"
 #include "Constants.h"
 #include "Math.h"
+
+
 
 Entity::Entity(SolarSystem *solar) : mPosition(glm::vec3(0)),
                                      mScale(1.0f),

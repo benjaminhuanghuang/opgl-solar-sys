@@ -2,6 +2,7 @@
 
 #include "SolarSystem.h"
 #include "InputHandler.h"
+#include "Planet.h"
 
 SolarSystem::SolarSystem() : mRenderer(nullptr)
 {
@@ -79,6 +80,7 @@ void SolarSystem::Draw()
 
 void SolarSystem::LoadData()
 {
+  Planet *a = new Planet(this);
 }
 
 void SolarSystem::UnloadData()

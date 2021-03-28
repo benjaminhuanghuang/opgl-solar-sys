@@ -1,10 +1,7 @@
 #pragma once
-
-#include "SolarSystem.h"
-#include "Model.h"
 #include "Camera.h"
 #include "Component.h"
-
+#include <vector>
 #include <glm/glm.hpp>
 
 /*
@@ -15,7 +12,7 @@ class Entity
 {
 
 public:
-  Entity(SolarSystem *sys);
+  Entity(class SolarSystem *sys);
   virtual ~Entity();
 
   // Add/remove components
@@ -74,22 +71,6 @@ public:
     mScale = scale;
   }
 
-  float getOrbitRadius() const {
-    return mOrbitRadius;
-  }
-
-  void setOrbitRadius(float orbitRadius){
-    mOrbitRadius = orbitRadius;
-  }
-
-    float getOrbitAngle() const {
-    return mOrbitAngle;
-  }
-
-  void setOrbitRadius(float orbitAngle){
-    mOrbitAngle = orbitAngle;
-  }
-
 	void ComputeWorldTransform();
 	const glm::mat4 &GetWorldTransform() const
 	{
@@ -103,7 +84,4 @@ protected:
   glm::mat4 mWorldTransform;
   float mScale;
   std::vector<class Component *> mComponents;
-
-  float mOrbitRadius;
-  float mOrbitAngle = 0.0f;
 };

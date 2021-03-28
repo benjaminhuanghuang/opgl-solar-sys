@@ -5,7 +5,7 @@ class MoveComponent : public Component
 {
 public:
 	// Lower update order to update first
-	MoveComponent(class Entity* owner, int updateOrder = 10);
+	MoveComponent(class Planet* owner, int updateOrder = 10);
 
 	void Update(float deltaTime) override;
 	
@@ -13,14 +13,14 @@ public:
 	void SetAngularSpeed(float speed) { mAngularSpeed = speed; }
 	
 
-	float GetOribtSpeed() const { return orbitSpeed; }
+	float GetOribtSpeed() const { return mOrbitSpeed; }
 	
-	void SetOrbitSpeed(float speed) { orbitSpeed = speed; }
+	void SetOrbitSpeed(float speed) { mOrbitSpeed = speed; }
 
 
 private:
 	// start rotation (radians/second)
 	float mAngularSpeed;
 	// start orbit speed (units/second)
-	float orbitSpeed;
+	float mOrbitSpeed;
 };

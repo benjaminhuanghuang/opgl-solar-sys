@@ -9,6 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/glm.hpp>
 #include "MeshComponent.h"
+#include "Texture.h"
 
 class Renderer {
 public:
@@ -25,7 +26,7 @@ public:
 	void RemoveMeshComp(class MeshComponent* mesh);
 
 	class Texture* GetTexture(const std::string& fileName);
-	class Mesh* GetMesh(const std::string& fileName);
+	class VertexArray* GetVertexArray(const std::string& fileName);
 
   void SetViewMatrix(const glm::mat4 &view) { mView = view; }
 
@@ -61,7 +62,7 @@ private:
   // 2D Sprite shader
 	class Shader* mSpriteShader;
   // Sprite vertex array
-	Mesh* mSpriteVerts;
+	class VertexArray*  mSpriteVerts;
   
   // ====== 3D Mesh shader
   // Mesh shader
@@ -72,7 +73,7 @@ private:
   // Map of textures loaded
 	std::unordered_map<std::string, class Texture*> mTextures;
 	// Map of meshes loaded
-	std::unordered_map<std::string, class Mesh*> mMeshes;
+	std::unordered_map<std::string, class VertexArray*> mVAs;
 
 	// All the sprite components drawn
 	std::vector<class SpriteComponent*> mSprites;

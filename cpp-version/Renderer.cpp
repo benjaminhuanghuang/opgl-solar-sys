@@ -2,7 +2,9 @@
 #include "Renderer.h"
 #include "Math.h"
 #include "Shader.h"
-#include "Mesh.h"
+#include "Texture.h"
+#include "ObjLoader.h"
+#include "VertexArray.h"
 
 Renderer::Renderer(SolarSystem *solar) : mSolarSys(solar), mSpriteShader(nullptr), mMeshShader(nullptr)
 {
@@ -157,28 +159,20 @@ Texture *Renderer::GetTexture(const std::string &fileName)
 	return tex;
 }
 
-Mesh *Renderer::GetMesh(const std::string &fileName)
+VertexArray *Renderer::GetVertexArray(const std::string &fileName)
 {
-	Mesh *m = nullptr;
-	auto iter = mMeshes.find(fileName);
-	if (iter != mMeshes.end())
+	VertexArray *va = nullptr;
+	auto iter = mVAs.find(fileName);
+	if (iter != mVAs.end())
 	{
-		m = iter->second;
+		va = iter->second;
 	}
 	else
 	{
-		m = new Mesh();
-		if (m->Load(fileName, this))
-		{
-			mMeshes.emplace(fileName, m);
-		}
-		else
-		{
-			delete m;
-			m = nullptr;
-		}
+		va = ObjLoader::LoadMesh(fileName);
+		mVAs.emplace(fileName, va);
 	}
-	return m;
+	return va;
 }
 
 bool Renderer::LoadShaders()
@@ -232,5 +226,5 @@ void Renderer::CreateSpriteVerts()
       0, 1, 2,
       2, 3, 0};
 
-  mSpriteVerts = new Mesh(vertices, 4, indices, 6);
+  mSpriteVerts = new VertexArray(vertices, 4, indices, 6);
 }

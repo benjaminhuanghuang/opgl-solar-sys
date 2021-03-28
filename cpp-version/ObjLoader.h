@@ -7,13 +7,12 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#include "Mesh.h"
 
 class ObjLoader
 {
 
 public:
-  static Mesh* LoadMesh(const std::string &fileName);
+  static class VertexArray* LoadMesh(const std::string &fileName);
 
 private:
   static void ProcessVertex(std::vector<std::string> const &vertexData,
