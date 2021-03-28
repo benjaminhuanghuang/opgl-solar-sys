@@ -122,6 +122,64 @@ void Renderer::Draw()
   glfwSwapBuffers(mWindow);
   glfwPollEvents();
 }
+void Renderer::AddMeshComp(MeshComponent *mesh)
+{
+	mMeshComps.emplace_back(mesh);
+}
+
+void Renderer::RemoveMeshComp(MeshComponent *mesh)
+{
+	auto iter = std::find(mMeshComps.begin(), mMeshComps.end(), mesh);
+	mMeshComps.erase(iter);
+}
+
+Texture *Renderer::GetTexture(const std::string &fileName)
+{
+	Texture *tex = nullptr;
+	auto iter = mTextures.find(fileName);
+	if (iter != mTextures.end())
+	{
+		tex = iter->second;
+	}
+	else
+	{
+		tex = new Texture();
+		if (tex->Load(fileName))
+		{
+			mTextures.emplace(fileName, tex);
+		}
+		else
+		{
+			delete tex;
+			tex = nullptr;
+		}
+	}
+	return tex;
+}
+
+Mesh *Renderer::GetMesh(const std::string &fileName)
+{
+	Mesh *m = nullptr;
+	auto iter = mMeshes.find(fileName);
+	if (iter != mMeshes.end())
+	{
+		m = iter->second;
+	}
+	else
+	{
+		m = new Mesh();
+		if (m->Load(fileName, this))
+		{
+			mMeshes.emplace(fileName, m);
+		}
+		else
+		{
+			delete m;
+			m = nullptr;
+		}
+	}
+	return m;
+}
 
 bool Renderer::LoadShaders()
 {

@@ -2,19 +2,19 @@
 #include "Shader.h"
 #include "Mesh.h"
 #include "Entity.h"
-#include "Game.h"
+#include "SolarSystem.h"
 #include "Renderer.h"
 #include "Texture.h"
 #include "VertexArray.h"
 
 MeshComponent::MeshComponent(Entity *owner) : Component(owner), mMesh(nullptr)
 {
-	mOwner->GetGame()->GetRenderer()->AddMeshComp(this);
+	mOwner->GetSolarSystem()->GetRenderer()->AddMeshComp(this);
 }
 
 MeshComponent::~MeshComponent()
 {
-	mOwner->GetGame()->GetRenderer()->RemoveMeshComp(this);
+	mOwner->GetSolarSystem()->GetRenderer()->RemoveMeshComp(this);
 }
 
 void MeshComponent::Draw(Shader *shader)

@@ -27,6 +27,8 @@ public:
   // Updates all the components attached to the actor (not overridable)
   void UpdateComponents(float deltaTime);
 
+  SolarSystem *GetSolarSystem() { return mSolarSys; }
+
   const glm::vec3 &getPosition() const
   {
     return mPosition;

@@ -1,13 +1,14 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/glm.hpp>
-#include "Mesh.h"
+#include "MeshComponent.h"
 
 class Renderer {
 public:
@@ -19,6 +20,12 @@ public:
   void UnloadData();
 
   void Draw();
+
+  void AddMeshComp(class MeshComponent* mesh);
+	void RemoveMeshComp(class MeshComponent* mesh);
+
+	class Texture* GetTexture(const std::string& fileName);
+	class Mesh* GetMesh(const std::string& fileName);
 
   void SetViewMatrix(const glm::mat4 &view) { mView = view; }
 
@@ -61,6 +68,18 @@ private:
   class Shader *mMeshShader;
   // Skinned shader
   class Shader *mSkinnedShader;
+
+  // Map of textures loaded
+	std::unordered_map<std::string, class Texture*> mTextures;
+	// Map of meshes loaded
+	std::unordered_map<std::string, class Mesh*> mMeshes;
+
+	// All the sprite components drawn
+	std::vector<class SpriteComponent*> mSprites;
+
+	// All mesh components drawn
+	std::vector<class MeshComponent*> mMeshComps;
+
 
   // View/projection for 3D shaders
   glm::mat4 mView;
