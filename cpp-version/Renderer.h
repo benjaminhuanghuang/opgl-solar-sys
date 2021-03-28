@@ -3,13 +3,10 @@
 #include <string>
 #include <unordered_map>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/glm.hpp>
-#include "MeshComponent.h"
-#include "Texture.h"
+
 
 class Renderer {
 public:

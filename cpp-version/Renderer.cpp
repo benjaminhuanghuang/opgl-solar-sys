@@ -1,6 +1,10 @@
 #include <iostream>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 #include "Renderer.h"
-#include "Math.h"
+#include "InputHandler.h"
+#include "Util.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "ObjLoader.h"
@@ -185,7 +189,7 @@ bool Renderer::LoadShaders()
   }
   mSpriteShader->SetActive();
 
-  glm::mat4 viewProj = Math::CreateSimpleViewProj(mScreenWidth, mScreenHeight);
+  glm::mat4 viewProj = Util::CreateSimpleViewProj(mScreenWidth, mScreenHeight);
   mSpriteShader->SetMatrixUniform("uViewProj", viewProj);
 
   //======== 3D shader, view, proj

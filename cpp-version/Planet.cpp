@@ -10,6 +10,7 @@
 #include "MeshComponent.h"
 #include "MoveComponent.h"
 #include "SolarSystem.h"
+#include "Renderer.h"
 
 Planet::Planet(SolarSystem *solar) : Entity(solar)
 {

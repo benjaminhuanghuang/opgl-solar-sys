@@ -1,9 +1,7 @@
 #pragma once
 
-#include "Renderer.h"
-#include "Gui.h"
-#include "Camera.h"
-#include "Entity.h"
+#include <vector>
+
 
 class SolarSystem {
 public:
@@ -15,7 +13,7 @@ public:
   void AddEntity(class Entity *entity);
 	void RemoveEntity(class Entity *engity);
 
-	Renderer *GetRenderer() { return mRenderer; }
+	class Renderer *GetRenderer() { return mRenderer; }
 
 private:
 	void ProcessInput();

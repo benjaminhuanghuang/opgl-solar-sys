@@ -3,7 +3,7 @@
 #include "SolarSystem.h"
 #include "InputHandler.h"
 #include "Planet.h"
-
+#include "Renderer.h"
 SolarSystem::SolarSystem() : mRenderer(nullptr)
 {
 }

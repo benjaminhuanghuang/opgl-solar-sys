@@ -1,4 +1,4 @@
-INCLUDES = -I/usr/local/include -Ilib/imgui -Ilib/stb_image
+INCLUDES = -I/usr/local/include -Ilib/imgui -Ilib/stb_image -I.
 
 LIBS = -L/usr/local/lib -lglfw  -lGLEW -lassimp -framework OpenGL
 

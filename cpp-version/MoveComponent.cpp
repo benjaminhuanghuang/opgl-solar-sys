@@ -8,7 +8,7 @@
 
 #include "MoveComponent.h"
 #include "Entity.h"
-#include "Math.h"
+#include "Util.h"
 #include "Planet.h"
 
 MoveComponent::MoveComponent(Planet *owner, int updateOrder)
@@ -20,12 +20,12 @@ MoveComponent::MoveComponent(Planet *owner, int updateOrder)
 
 void MoveComponent::Update(float deltaTime)
 {
-  if (!Math::NearZero(mAngularSpeed))
+  if (!Util::NearZero(mAngularSpeed))
   {
     float angle = mAngularSpeed * deltaTime;
     mOwner->setRotZ(mOwner->getRotZ() + angle);
   }
-  if (!Math::NearZero(mOrbitSpeed))
+  if (!Util::NearZero(mOrbitSpeed))
   {
     float orbitalAngle = ((Planet *)mOwner)->getOrbitAngle() + mOrbitSpeed * deltaTime;
     ((Planet *)mOwner)->setOrbitAngle(orbitalAngle);
