@@ -122,13 +122,14 @@ void Renderer::Draw()
 
   // mSolarSys->GetGui()->Draw();
 
+  //==========  Darw 2D Sprite
   // Set shader/vao as active
-  //mSpriteShader->SetActive();
-  //mSpriteVerts->SetActive();
-  // for (auto sprite : mSprites)
-  // {
-  //   sprite->Draw(mSpriteShader);
-  // }
+  mSpriteShader->SetActive();
+  mSpriteVerts->SetActive();
+  for (auto sprite : mSprites)
+  {
+    sprite->Draw(mSpriteShader);
+  }
 
 
   // Swap the buffers
@@ -218,7 +219,7 @@ bool Renderer::LoadShaders()
 {
   //======= 2D shader, view, proj
   mSpriteShader = new Shader();
-  if (!mSpriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
+  if (!mSpriteShader->Load("shaders/Sprite.vert", "shaders/Sprite.frag"))
   {
     return false;
   }
@@ -229,7 +230,7 @@ bool Renderer::LoadShaders()
 
   //======== 3D shader, view, proj
   mMeshShader = new Shader();
-  if (!mMeshShader->Load("Shaders/Phong.vert", "Shaders/Phong.frag"))
+  if (!mMeshShader->Load("shaders/Phong.vert", "shaders/Phong.frag"))
   {
     return false;
   }
