@@ -1,80 +1,56 @@
 #include "Entity.h"
 #include "Constants.h"
+#include "Math.h"
 
-Entity::Entity(Model *model, const glm::vec3 &position, float rotX, float rotY, float rotZ, float scale)
-    : model(model), position(position), rotX(rotX), rotY(rotY), rotZ(rotZ), scale(scale) {}
+Entity::Entity(SolarSystem *solar) : mPosition(glm::vec3(0)),
+                                     mScale(1.0f),
+                                     mRotX(0),
+                                     mRotY(0),
+                                     mRotZ(0),
+                                     mSolarSys(solar)
 
-void Entity::increatePosition(float dx, float dy, float dz)
 {
-  this->position.x += dx;
-  this->position.y += dy;
-  this->position.z += dz;
+  solar->AddEntity(this);
 }
 
-void Entity::increateRotation(float dx, float dy, float dz)
+Entity::~Entity()
 {
-  this->rotX += dx;
-  this->rotY += dy;
-  this->rotZ += dz;
+  mSolarSys->RemoveEntity(this);
+  // Need to delete components
+  // Because ~Component calls RemoveComponent, need a different style loop
+  while (!mComponents.empty())
+  {
+    delete mComponents.back();
+  }
 }
 
-void Entity::rotateAroundSun(float time, float orbitSpeed, float radius)
+void Entity::Update(float deltaTime)
 {
-  orbitalAngle += orbitSpeed * time;
-  setPosition(glm::vec3(Constants::ORIGIN_X + radius * glm::cos(orbitalAngle), 0, Constants::ORIGIN_Z + radius * glm::sin(orbitalAngle)));
+
+  ComputeWorldTransform();
+
+  UpdateComponents(deltaTime);
+
+  ComputeWorldTransform();
 }
 
-Model *Entity::getModel() const
+void Entity::UpdateComponents(float deltaTime)
 {
-  return model;
+  for (auto comp : mComponents)
+  {
+    comp->Update(deltaTime);
+  }
 }
 
-const glm::vec3 &Entity::getPosition() const
+void Entity::ComputeWorldTransform()
 {
-  return position;
-}
 
-float Entity::getRotX() const
-{
-  return rotX;
-}
+  // // Scale, then rotate, then translate
+  mWorldTransform  = Math::CreateTransformationMatrix(mPosition, mRotX, mRotY, mRotZ, mScale);
 
-float Entity::getRotY() const
-{
-  return rotY;
-}
-
-float Entity::getRotZ() const
-{
-  return rotZ;
-}
-
-float Entity::getScale() const
-{
-  return scale;
-}
-
-void Entity::setPosition(const glm::vec3 &position)
-{
-  Entity::position = position;
-}
-
-void Entity::setRotX(float rotX)
-{
-  Entity::rotX = rotX;
-}
-
-void Entity::setRotY(float rotY)
-{
-  Entity::rotY = rotY;
-}
-
-void Entity::setRotZ(float rotZ)
-{
-  Entity::rotZ = rotZ;
-}
-
-void Entity::setScale(float scale)
-{
-  Entity::scale = scale;
+  // Inform components world transform updated
+  for (auto comp : mComponents)
+  {
+    comp->OnUpdateWorldTransform();
+  }
 }

@@ -12,6 +12,9 @@ public:
 	void RunLoop();
 	void Shutdown();
 
+  void AddEntity(class Entity *entity);
+	void RemoveEntity(class Entity *engity);
+
 	Renderer *GetRenderer() { return mRenderer; }
 
 private:
@@ -22,7 +25,8 @@ private:
 	void LoadData();
 	void UnloadData();
 
-
+  	// All the entity(stars, sprite...) in the game
+	std::vector<class Entity *> mEntities;
 	class Renderer *mRenderer;
 
 	unsigned int mTicksCount;

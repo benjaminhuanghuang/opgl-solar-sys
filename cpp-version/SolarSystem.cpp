@@ -24,6 +24,24 @@ bool SolarSystem::Initialize()
   return true;
 }
 
+void SolarSystem::AddEntity(Entity *entity)
+{
+		mEntities.emplace_back(entity);
+}
+
+void SolarSystem::RemoveEntity(Entity *entity)
+{
+	// Is it in actors?
+	auto iter = std::find(mEntities.begin(), mEntities.end(), entity);
+	if (iter != mEntities.end())
+	{
+		// Swap to end of vector and pop off (avoid erase copies)
+		std::iter_swap(iter, mEntities.end() - 1);
+		mEntities.pop_back();
+	}
+}
+
+
 void SolarSystem::RunLoop()
 {
   while (!glfwWindowShouldClose(mRenderer->getWindow()))
