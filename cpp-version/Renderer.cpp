@@ -4,6 +4,8 @@
 
 #include "Renderer.h"
 #include "InputHandler.h"
+#include "SolarSystem.h"
+#include "Gui.h"
 #include "Util.h"
 #include "Shader.h"
 #include "Texture.h"
@@ -72,7 +74,6 @@ bool Renderer::Initialize(int screenWidth, int screenHeight, const std::string &
 
   // Create quad for drawing sprites
   CreateSpriteVerts();
-
   return true;
 }
 
@@ -116,6 +117,7 @@ void Renderer::Draw()
   glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
   glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
+  mSolarSys->GetGui()->Draw();
   // Set shader/vao as active
   //mSpriteShader->SetActive();
   //mSpriteVerts->SetActive();
@@ -123,6 +125,7 @@ void Renderer::Draw()
   // {
   //   sprite->Draw(mSpriteShader);
   // }
+
 
   // Swap the buffers
   glfwSwapBuffers(mWindow);

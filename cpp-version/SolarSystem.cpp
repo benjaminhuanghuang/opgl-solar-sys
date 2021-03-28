@@ -4,6 +4,8 @@
 #include "InputHandler.h"
 #include "Planet.h"
 #include "Renderer.h"
+#include "Gui.h"
+
 SolarSystem::SolarSystem() : mRenderer(nullptr)
 {
 }
@@ -22,6 +24,9 @@ bool SolarSystem::Initialize()
 
   mTicksCount = glfwGetTime();
 
+  mGui = new Gui(mRenderer);
+
+  LoadData();
   return true;
 }
 

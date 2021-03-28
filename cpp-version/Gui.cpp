@@ -18,15 +18,12 @@ Gui::~Gui()
   ImGui::DestroyContext();
 }
 
-void Gui::initFrame()
+void Gui::Draw()
 {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
-}
 
-void Gui::update()
-{
   if (freePressed)
     focusState = FocusState::NONE;
   else if (sunPressed)
@@ -51,6 +48,9 @@ void Gui::update()
   displayCameraWindow();
   displaySettingsWindow();
   displayInfoWindow();
+
+  ImGui::Render();
+  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void Gui::displayCameraWindow()
@@ -200,12 +200,6 @@ void Gui::displayInfoWindow()
   }
 
   ImGui::End();
-}
-
-void Gui::render()
-{
-  ImGui::Render();
-  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void Gui::button(const std::string &label, const std::string &info, bool *value)

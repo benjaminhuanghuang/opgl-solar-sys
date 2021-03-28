@@ -19,6 +19,7 @@ Planet::Planet(SolarSystem *solar) : Entity(solar)
   // MeshComponent
   MeshComponent *mesh = new MeshComponent(this);
   mesh->SetVertexArray(GetSolarSystem()->GetRenderer()->GetVertexArray("obj/sphere.obj"));
+  mesh->SetVertexArray(GetSolarSystem()->GetRenderer()->GetTexture("img/earthTexture.jpeg"));
 
   // Create a move component, and set  speed
   MoveComponent *move = new MoveComponent(this);

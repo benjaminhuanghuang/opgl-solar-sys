@@ -2,7 +2,6 @@
 
 #include <vector>
 
-
 class SolarSystem {
 public:
 	SolarSystem();
@@ -14,6 +13,7 @@ public:
 	void RemoveEntity(class Entity *engity);
 
 	class Renderer *GetRenderer() { return mRenderer; }
+  class Gui * GetGui() {return mGui;}
 
 private:
 	void ProcessInput();
@@ -28,4 +28,5 @@ private:
 	class Renderer *mRenderer;
 
 	unsigned int mTicksCount;
+  class Gui* mGui = nullptr;
 };

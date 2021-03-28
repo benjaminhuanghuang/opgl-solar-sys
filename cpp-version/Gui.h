@@ -27,9 +27,8 @@ public:
   Gui(Renderer *renderer);
   virtual ~Gui();
 
-  void initFrame();
-  void update();
-  void render();
+  void Draw();
+
 
   FocusState getFocusState() const;
 
