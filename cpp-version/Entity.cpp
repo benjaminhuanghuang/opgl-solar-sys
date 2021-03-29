@@ -27,7 +27,6 @@ Entity::~Entity()
 
 void Entity::Update(float deltaTime)
 {
-
   ComputeWorldTransform();
 
   UpdateComponents(deltaTime);

@@ -36,6 +36,9 @@ bool Renderer::Initialize(int screenWidth, int screenHeight, const std::string &
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   mWindow = glfwCreateWindow(screenWidth, screenHeight, title.c_str(), NULL, NULL);
+  mScreenWidth = screenWidth;
+  mScreenHeight = screenHeight;
+  
   if (!mWindow)
   {
     glfwTerminate();
@@ -51,8 +54,8 @@ bool Renderer::Initialize(int screenWidth, int screenHeight, const std::string &
     glfwTerminate();
     return false;
   }
-  glfwGetFramebufferSize(mWindow, &mScreenWidth, &mScreenHeight);
 
+  // glfwGetFramebufferSize(mWindow, &mScreenWidth, &mScreenHeight);
   glViewport(0, 0, mScreenWidth, mScreenHeight);
 
   glfwSetKeyCallback(mWindow, InputHandler::keyCallback);

@@ -15,7 +15,7 @@ bool SolarSystem::Initialize()
 {
   // Create the renderer
   mRenderer = new Renderer(this);
-  if (!mRenderer->Initialize(1280, 720, "OpenGL Salor Syatem"))
+  if (!mRenderer->Initialize(1024, 768, "OpenGL Salor System"))
   {
     std::cout << "Failed to initialize renderer" << std::endl;
     delete mRenderer;
