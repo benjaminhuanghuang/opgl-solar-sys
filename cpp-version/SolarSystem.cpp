@@ -90,9 +90,9 @@ void SolarSystem::Draw()
 
 void SolarSystem::LoadData()
 {
-  Planet *a = new Planet(this);
+  // Planet *a = new Planet(this);
 
-  // Cube *cube = new Cube(this);
+  Cube *cube = new Cube(this);
 
   // Show a 2D Radar
   Entity *rader = new Entity(this);
