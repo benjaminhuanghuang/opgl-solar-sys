@@ -11,7 +11,7 @@
 #include "Util.h"
 #include "Planet.h"
 
-MoveComponent::MoveComponent(Planet *owner, int updateOrder)
+MoveComponent::MoveComponent(Entity *owner, int updateOrder)
     : Component(owner, updateOrder),
       mAngularSpeed(0.0f),
       mOrbitSpeed(0.0f)

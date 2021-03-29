@@ -5,7 +5,7 @@ class MoveComponent : public Component
 {
 public:
 	// Lower update order to update first
-	MoveComponent(class Planet* owner, int updateOrder = 10);
+	MoveComponent(class Entity* owner, int updateOrder = 10);
 
 	void Update(float deltaTime) override;
 	

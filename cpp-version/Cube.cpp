@@ -85,6 +85,11 @@ Cube::Cube(SolarSystem *solar) : Entity(solar)
   SetRotX(10);
   SetRotY(10);
   SetRotZ(10);
+
+    // Create a move component, and set  speed
+  MoveComponent *move = new MoveComponent(this);
+  move->SetAngularSpeed(0.50f);
+  move->SetOrbitSpeed(0.0f);
 }
 
 Cube::~Cube()

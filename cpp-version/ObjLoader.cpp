@@ -70,7 +70,7 @@ VertexArray* ObjLoader::LoadMesh(std::string const &filename)
     ProcessVertex(v3, positions, texCoords, normals, vertices, indices);
   }
 
-  return new VertexArray(vertices.data(), vertices.size(), indices.data(), indices.size());
+  return new VertexArray(vertices.data(), positions.size(), indices.data(), indices.size());
 }
 
 void ObjLoader::ProcessVertex(std::vector<std::string> const &vertexData,

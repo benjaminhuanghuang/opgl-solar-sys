@@ -55,7 +55,7 @@ public:
 
   float GetRotZ() const
   {
-    return mRotX;
+    return mRotZ;
   }
   void SetRotZ(float rotZ)
   {
