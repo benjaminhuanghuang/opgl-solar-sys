@@ -23,7 +23,7 @@ void MoveComponent::Update(float deltaTime)
   if (!Util::NearZero(mAngularSpeed))
   {
     float angle = mAngularSpeed * deltaTime;
-    mOwner->SetRotZ(mOwner->GetRotZ() + angle);
+    mOwner->SetRotY(mOwner->GetRotY() + angle);
   }
   if (!Util::NearZero(mOrbitSpeed))
   {

@@ -23,7 +23,7 @@ Planet::Planet(SolarSystem *solar) : Entity(solar)
 
   // Create a move component, and set  speed
   MoveComponent *move = new MoveComponent(this);
-  move->SetAngularSpeed(0.5f);
+  move->SetAngularSpeed(0.1f);
   move->SetOrbitSpeed(0.0f);
 }
 

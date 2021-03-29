@@ -85,5 +85,5 @@ void ObjLoader::ProcessVertex(std::vector<std::string> const &vertexIndex,
 
   glm::vec2 texCoord = temp_uvs[stoi(vertexIndex[1]) - 1];
   vertices[idx * 8 + 6] = texCoord.x;
-  vertices[idx * 8 + 6 + 1] = 1 - texCoord.y;
+  vertices[idx * 8 + 6 + 1] = texCoord.y;
 }
