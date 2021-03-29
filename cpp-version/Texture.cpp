@@ -8,6 +8,7 @@
 
 #include "Texture.h"
 #include <GL/glew.h>
+#define STB_IMAGE_IMPLEMENTATION
 #include "lib/stb_image/stb_image.h"
 
 Texture::Texture()
@@ -22,6 +23,7 @@ Texture::~Texture()
 bool Texture::Load(const std::string &fileName)
 {
 	int channels = 0;
+  stbi_set_flip_vertically_on_load(true);
   unsigned char *image = stbi_load(fileName.c_str(), &mWidth, &mHeight, &channels, 4);
 	if (image == nullptr)
 	{

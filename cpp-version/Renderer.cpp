@@ -107,12 +107,13 @@ void Renderer::Draw()
   // Set the mesh shader active
   mBasicMeshShader->SetActive();
   // Update view-projection matrix
-  mBasicMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+  mBasicMeshShader->SetMatrixUniform("view", mView);
+  mBasicMeshShader->SetMatrixUniform("projection", mProjection);
   // Update lighting uniforms
   // SetLightUniforms(mMeshShader);
   for (auto mc : mMeshComps)
   {
-    mc->Draw(mMeshShader);
+    mc->Draw(mBasicMeshShader);
   }
 
   // Draw all sprite components
@@ -247,15 +248,17 @@ bool Renderer::LoadShaders()
   mBasicMeshShader->SetActive();
 
   //== Set the view-projection matrix
-  mView = glm::lookAt(glm::vec3(0, 0, 0), // eye is at (4,3,3), in World Space
+  mView = glm::lookAt(glm::vec3(4, 3, 3), // eye is at (4,3,3), in World Space
                       glm::vec3(0, 0, 0), // looks at target at origin
                       glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
   );
 
   // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-  mProjection = glm::perspective(glm::radians(45.0f), (float)mScreenWidth / (float)mScreenHeight, 25.0f, 100.0f);
+  mProjection = glm::perspective(glm::radians(70.0f), (float)mScreenWidth / (float)mScreenHeight, 0.1f, 4000.0f);
 
-  mBasicMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
+  // mBasicMeshShader->SetMatrixUniform("uViewProj", mProjection * mView);
+  mBasicMeshShader->SetMatrixUniform("view", mView);
+  mBasicMeshShader->SetMatrixUniform("projection", mProjection);
   return true;
 }
 

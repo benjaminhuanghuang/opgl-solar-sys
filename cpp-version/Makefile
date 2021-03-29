@@ -1,8 +1,8 @@
-INCLUDES = -I/usr/local/include -Ilib/imgui -Ilib/stb_image
+INCLUDES = -I/usr/local/include -Ilib/imgui
 
 LIBS = -L/usr/local/lib -lglfw  -lGLEW -lassimp -framework OpenGL
 
-FILES = lib/imgui/*.cpp lib/stb_image/stb_image.cpp *.cpp
+FILES = lib/imgui/*.cpp *.cpp
 
 CXXFLAGS += -std=c++11 -g
 
