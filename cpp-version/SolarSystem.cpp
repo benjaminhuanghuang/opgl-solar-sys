@@ -91,12 +91,12 @@ void SolarSystem::LoadData()
 {
   Planet *a = new Planet(this);
 
-
+  // Show a 2D Radar
   Entity *rader = new Entity(this);
 	rader->SetPosition(glm::vec3(375.0f, -275.0f, 0.0f));
 	rader->SetScale(0.75f);
 	SpriteComponent *sc = new SpriteComponent(rader);
-	sc->SetTexture(mRenderer->GetTexture("img/Radar.png"));
+	sc->SetTexture(mRenderer->GetTexture("images/Radar.png"));
 }
 
 void SolarSystem::UnloadData()
