@@ -78,9 +78,13 @@ Cube::Cube(SolarSystem *solar) : Entity(solar)
       20, 21, 23,
       23, 21, 22};
 
-  VertexArray* va = new VertexArray(cube_vertices, sizeof(cube_vertices) / 8 / sizeof(GLfloat), cube_indexes, sizeof(cube_indexes)/sizeof(GLuint));
+  VertexArray *va = new VertexArray(cube_vertices, sizeof(cube_vertices) / 8, cube_indexes, sizeof(cube_indexes));
   mesh->SetVertexArray(va);
   mesh->SetTexture(GetSolarSystem()->GetRenderer()->GetTexture("images/wood.png"));
+
+  SetRotX(10);
+  SetRotY(10);
+  SetRotZ(10);
 }
 
 Cube::~Cube()

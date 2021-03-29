@@ -27,7 +27,7 @@ void main()
 	// Convert position to homogeneous coordinates
 	vec4 pos = vec4(inPosition, 1.0);
 	// Transform to position world space, then clip space
-	gl_Position = pos;//projection * view * model * pos;
+	gl_Position = pos * model * view * projection;
 
 	// Pass along the texture coordinate to frag shader
 	fragTexCoord = inTexCoord;
