@@ -47,7 +47,7 @@ public:
   GLFWwindow *getWindow() const { return mWindow; }
   float GetScreenWidth() const { return mScreenWidth; }
   float GetScreenHeight() const { return mScreenHeight; }
-
+  
 private:
   bool LoadShaders();
   void CreateSpriteVerts();
