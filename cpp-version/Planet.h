@@ -6,7 +6,7 @@
 class Planet : public Entity
 {
 public:
-  Planet(class SolarSystem *solar);
+  Planet(class SolarSystem *solar, const std::string& texture);
   ~Planet();
 
   float GetOrbitRadius() const

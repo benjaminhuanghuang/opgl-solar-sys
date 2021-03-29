@@ -61,19 +61,19 @@ namespace Constants
 
 
   // Resources
-  constexpr char OBJ_SKYBOX[] = "obj/skybox.obj";
-  constexpr char OBJ_SPHERE[] = "obj/sphere.obj";
-  constexpr char OBJ_RINGS[] = "obj/rings.obj";
+  constexpr char OBJ_SKYBOX[] = "objs/skybox.obj";
+  constexpr char OBJ_SPHERE[] = "objs/sphere.obj";
+  constexpr char OBJ_RINGS[] = "objs/rings.obj";
 
-  constexpr char TEXTURE_STARS[] = "img/starsTexture.png";
-  constexpr char TEXTURE_SUN[] = "img/sunTexture.png";
-  constexpr char TEXTURE_MERCURY[] = "img/mercuryTexture.png";
-  constexpr char TEXTURE_VENUS[] = "img/venusTexture.png";
-  constexpr char TEXTURE_EARTH[] = "img/earthTexture.jpeg";
-  constexpr char TEXTURE_MARS[] = "img/marsTexture.png";
-  constexpr char TEXTURE_JUPITER[] = "img/jupiterTexture.png";
-  constexpr char TEXTURE_SATURN[] = "img/saturnTexture.png";
-  constexpr char TEXTURE_RINGS[] = "img/ringsTexture.png";
-  constexpr char TEXTURE_URANUS[] = "img/uranusTexture.png";
-  constexpr char TEXTURE_NEPTUNE[] = "img/neptuneTexture.png";
+  constexpr char TEXTURE_STARS[] = "images/starsTexture.png";
+  constexpr char TEXTURE_SUN[] = "images/sunTexture.png";
+  constexpr char TEXTURE_MERCURY[] = "images/mercuryTexture.png";
+  constexpr char TEXTURE_VENUS[] = "images/venusTexture.png";
+  constexpr char TEXTURE_EARTH[] = "images/earthTexture.jpeg";
+  constexpr char TEXTURE_MARS[] = "images/marsTexture.png";
+  constexpr char TEXTURE_JUPITER[] = "images/jupiterTexture.png";
+  constexpr char TEXTURE_SATURN[] = "images/saturnTexture.png";
+  constexpr char TEXTURE_RINGS[] = "images/ringsTexture.png";
+  constexpr char TEXTURE_URANUS[] = "images/uranusTexture.png";
+  constexpr char TEXTURE_NEPTUNE[] = "images/neptuneTexture.png";
 }

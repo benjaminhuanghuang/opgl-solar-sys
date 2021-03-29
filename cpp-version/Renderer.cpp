@@ -248,7 +248,7 @@ bool Renderer::LoadShaders()
   mBasicMeshShader->SetActive();
 
   //== Set the view-projection matrix
-  mView = glm::lookAt(glm::vec3(4, 3, 3), // eye is at (4,3,3), in World Space
+  mView = glm::lookAt(glm::vec3(4, 3, 30), // eye is at (4,3,3), in World Space
                       glm::vec3(0, 0, 0), // looks at target at origin
                       glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
   );
@@ -256,7 +256,7 @@ bool Renderer::LoadShaders()
   //mView = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f)); 
 
   // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-  mProjection = glm::perspective(glm::radians(45.0f), (float)mScreenWidth / (float)mScreenHeight, 0.1f, 4000.0f);
+  mProjection = glm::perspective(glm::radians(70.0f), (float)mScreenWidth / (float)mScreenHeight, 0.1f, 4000.0f);
 
   // mBasicMeshShader->SetMatrixUniform("uViewProj", mProjection * mView);
   mBasicMeshShader->SetMatrixUniform("view", mView);

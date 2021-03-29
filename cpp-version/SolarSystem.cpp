@@ -6,7 +6,8 @@
 #include "Renderer.h"
 #include "Gui.h"
 #include "SpriteComponent.h"
-#include "Cube.h"
+#include "Constants.h"
+#include <glm/gtc/constants.hpp>
 
 SolarSystem::SolarSystem() : mRenderer(nullptr)
 {
@@ -90,7 +91,11 @@ void SolarSystem::Draw()
 
 void SolarSystem::LoadData()
 {
-  Planet *a = new Planet(this);
+  Planet *earth = new Planet(this, Constants::TEXTURE_EARTH);
+  // earth->SetPosition(glm::vec3(Constants::D_FROM_EARTH_EARTH, 0, -25.0));
+  // earth->SetRotX(glm::pi<float>()/2);
+  earth->SetScale(Constants::R_EARTH);
+
 
   // Cube *cube = new Cube(this);
 

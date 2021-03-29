@@ -11,15 +11,14 @@
 #include "MoveComponent.h"
 #include "SolarSystem.h"
 
-
-Planet::Planet(SolarSystem *solar) : Entity(solar)
+Planet::Planet(SolarSystem *solar, const std::string &texture) : Entity(solar)
 {
   // Initialize to random position/orientation
 
   // MeshComponent
   MeshComponent *mesh = new MeshComponent(this);
   mesh->SetVertexArray(GetSolarSystem()->GetRenderer()->GetVertexArray("objs/sphere.obj"));
-  mesh->SetTexture(GetSolarSystem()->GetRenderer()->GetTexture("images/earthTexture.jpeg"));
+  mesh->SetTexture(GetSolarSystem()->GetRenderer()->GetTexture(texture));
 
   // Create a move component, and set  speed
   MoveComponent *move = new MoveComponent(this);
