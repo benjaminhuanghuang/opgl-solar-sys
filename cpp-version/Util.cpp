@@ -35,11 +35,11 @@ namespace Util
     return matrix;
   }
 
-  glm::mat4 CreateViewMatrix(glm::vec3 cameraPos, float cameraPitch, float cameraYaw)
+  glm::mat4 CreateViewMatrix(const glm::vec3 &cameraPos, float cameraPitch, float cameraYaw)
   {
     glm::mat4 view(1.0f);
-    view = glm::rotate(view, cameraPitch, glm::vec3(1, 0, 0));
-    view = glm::rotate(view, cameraYaw, glm::vec3(0, 1, 0));
+    view = glm::rotate(view, cameraPitch, glm::vec3(1, 0, 0)); // X
+    view = glm::rotate(view, cameraYaw, glm::vec3(0, 1, 0));   // Y
     glm::vec3 negativeCameraPos = glm::vec3(-cameraPos.x, -cameraPos.y, -cameraPos.z);
     view = glm::translate(view, negativeCameraPos);
 

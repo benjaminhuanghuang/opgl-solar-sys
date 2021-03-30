@@ -29,4 +29,9 @@ The light model for this project is initiated in the fragment shader.
 
 
 ## Camera
-
+- yaw rotaion about UP  Y
+- pitch rotaion about Side X
+- roll  rotaion about Forward
+```
+  FinalRot =(RollMatrix)(PitchMatrix)(YawMatrix)
+```

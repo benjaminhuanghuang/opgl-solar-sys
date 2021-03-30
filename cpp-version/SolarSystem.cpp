@@ -7,9 +7,10 @@
 #include "Gui.h"
 #include "SpriteComponent.h"
 #include "Constants.h"
+#include "Camera.h"
 #include <glm/gtc/constants.hpp>
 
-SolarSystem::SolarSystem() : mRenderer(nullptr)
+SolarSystem::SolarSystem() : mRenderer(nullptr), mGui(nullptr), mCamera(nullptr)
 {
 }
 
@@ -28,7 +29,7 @@ bool SolarSystem::Initialize()
   mTicksCount = glfwGetTime();
 
   mGui = new Gui(mRenderer);
-
+  mCamera = new Camera(mRenderer);
   LoadData();
   return true;
 }
@@ -78,6 +79,8 @@ void SolarSystem::Update()
 	}
 	mTicksCount = glfwGetTime();
 
+  mCamera->Update();
+
   for (auto entity : mEntities)
 	{
 		entity->Update(deltaTime);
@@ -91,11 +94,43 @@ void SolarSystem::Draw()
 
 void SolarSystem::LoadData()
 {
+  Planet *sun = new Planet(this, Constants::TEXTURE_SUN);
+  sun->SetPosition(glm::vec3(Constants::D_FROM_EARTH_SUN, 0, -25.0));
+  sun->SetScale(Constants::R_SUN);
+
+
   Planet *earth = new Planet(this, Constants::TEXTURE_EARTH);
-  // earth->SetPosition(glm::vec3(Constants::D_FROM_EARTH_EARTH, 0, -25.0));
-  // earth->SetRotX(glm::pi<float>()/2);
+  earth->SetPosition(glm::vec3(Constants::D_FROM_EARTH_EARTH, 0, -25.0));
   earth->SetScale(Constants::R_EARTH);
 
+  Planet *jupiter = new Planet(this, Constants::TEXTURE_JUPITER);
+  jupiter->SetPosition(glm::vec3(Constants::D_FROM_EARTH_JUPITER, 0, -25.0));
+  jupiter->SetScale(Constants::R_JUPITER);
+
+
+  Planet *mars = new Planet(this, Constants::TEXTURE_MARS);
+  mars->SetPosition(glm::vec3(Constants::D_FROM_EARTH_MARS, 0, -25.0));
+  mars->SetScale(Constants::R_MARS);
+
+  Planet *mercury = new Planet(this, Constants::TEXTURE_MERCURY);
+  mercury->SetPosition(glm::vec3(Constants::D_FROM_EARTH_MERCURY, 0, -25.0));
+  mercury->SetScale(Constants::R_MERCURY);
+
+  Planet *neptune = new Planet(this, Constants::TEXTURE_NEPTUNE);
+  neptune->SetPosition(glm::vec3(Constants::D_FROM_EARTH_NEPTUNE, 0, -25.0));
+  neptune->SetScale(Constants::R_NEPTUNE);
+
+  Planet *saturn = new Planet(this, Constants::TEXTURE_SATURN);
+  saturn->SetPosition(glm::vec3(Constants::D_FROM_EARTH_SATURN, 0, -25.0));
+  saturn->SetScale(Constants::R_SATURN);
+
+  Planet *venus = new Planet(this, Constants::TEXTURE_VENUS);
+  venus->SetPosition(glm::vec3(Constants::D_FROM_EARTH_VENUS, 0, -25.0));
+  venus->SetScale(Constants::R_VENUS);
+
+  Planet *nranus = new Planet(this, Constants::TEXTURE_URANUS);
+  nranus->SetPosition(glm::vec3(Constants::D_FROM_EARTH_URANUS, 0, -25.0));
+  nranus->SetScale(Constants::R_URANUS);
 
   // Cube *cube = new Cube(this);
 
@@ -122,5 +157,8 @@ void SolarSystem::Shutdown()
   {
     mRenderer->Shutdown();
   }
+  delete mRenderer;
+  delete mGui;
+  delete mCamera;
 }
 

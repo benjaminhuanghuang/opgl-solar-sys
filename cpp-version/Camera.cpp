@@ -1,125 +1,105 @@
 #include <iostream>
 #include "Camera.h"
+#include "Renderer.h"
+#include "Util.h"
 
-Camera::Camera()
+Camera::Camera(Renderer *renderer)
+    : mYaw(0.0f), mPitch(0.0f), mRenderer(renderer),
+      mPosition(glm::vec3(Constants::ORIGIN_X, 0, Constants::R_SUN + 400))
 {
-  yaw = 0.0f;
-  pitch = 0.0f;
 }
+
 Camera::~Camera()
 {
-  delete position;
 }
 
-void Camera::update()
+void Camera::Update()
 {
   if (InputHandler::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
   {
-    float dx = SUPER_VELOCITY * glm::sin(yaw);
-    float dy = SUPER_VELOCITY * pitch;
-    float dz = SUPER_VELOCITY * glm::cos(yaw);
+    float dx = SUPER_VELOCITY * glm::sin(mYaw);
+    float dy = SUPER_VELOCITY * mPitch;
+    float dz = SUPER_VELOCITY * glm::cos(mYaw);
 
     if (InputHandler::isKeyPressed(GLFW_KEY_W))
     {
-      position->x += dx;
-      position->y -= dy;
-      position->z -= dz;
+      mPosition.x += dx;
+      mPosition.y -= dy;
+      mPosition.z -= dz;
     }
     if (InputHandler::isKeyPressed(GLFW_KEY_S))
     {
-      position->x -= dx;
-      position->y += dy;
-      position->z += dz;
+      mPosition.x -= dx;
+      mPosition.y += dy;
+      mPosition.z += dz;
     }
     if (InputHandler::isKeyPressed(GLFW_KEY_D))
     {
-      position->x += dz;
-      position->z += dx;
+      mPosition.x += dz;
+      mPosition.z += dx;
     }
     if (InputHandler::isKeyPressed(GLFW_KEY_A))
     {
-      position->x -= dz;
-      position->z -= dx;
+      mPosition.x -= dz;
+      mPosition.z -= dx;
     }
 
     if (InputHandler::isKeyPressed(GLFW_KEY_LEFT_SHIFT))
-      position->y -= SUPER_VELOCITY;
+      mPosition.y -= SUPER_VELOCITY;
     if (InputHandler::isKeyPressed(GLFW_KEY_SPACE))
-      position->y += SUPER_VELOCITY;
+      mPosition.y += SUPER_VELOCITY;
   }
   else
   {
-    float dx = VELOCITY * glm::sin(yaw);
-    float dy = VELOCITY * pitch;
-    float dz = VELOCITY * glm::cos(yaw);
+    float dx = VELOCITY * glm::sin(mYaw);
+    float dy = VELOCITY * mPitch;
+    float dz = VELOCITY * glm::cos(mYaw);
 
     if (InputHandler::isKeyPressed(GLFW_KEY_W))
     {
-      position->x += dx;
-      position->y -= dy;
-      position->z -= dz;
+      mPosition.x += dx;
+      mPosition.y -= dy;
+      mPosition.z -= dz;
     }
     if (InputHandler::isKeyPressed(GLFW_KEY_S))
     {
-      position->x -= dx;
-      position->y += dy;
-      position->z += dz;
+      mPosition.x -= dx;
+      mPosition.y += dy;
+      mPosition.z += dz;
     }
     if (InputHandler::isKeyPressed(GLFW_KEY_D))
     {
-      position->x += dz;
-      position->z += dx;
+      mPosition.x += dz;
+      mPosition.z += dx;
     }
     if (InputHandler::isKeyPressed(GLFW_KEY_A))
     {
-      position->x -= dz;
-      position->z -= dx;
+      mPosition.x -= dz;
+      mPosition.z -= dx;
     }
 
     if (InputHandler::isKeyPressed(GLFW_KEY_LEFT_SHIFT))
-      position->y -= VELOCITY;
+      mPosition.y -= VELOCITY;
     if (InputHandler::isKeyPressed(GLFW_KEY_SPACE))
-      position->y += VELOCITY;
+      mPosition.y += VELOCITY;
   }
 
   if (InputHandler::isKeyPressed(GLFW_KEY_UP))
-    pitch -= VELOCITY / 100.0f;
+    mPitch -= VELOCITY / 100.0f;
   if (InputHandler::isKeyPressed(GLFW_KEY_DOWN))
-    pitch += VELOCITY / 100.0f;
+    mPitch += VELOCITY / 100.0f;
   if (InputHandler::isKeyPressed(GLFW_KEY_LEFT))
-    yaw -= VELOCITY / 100.0f;
+    mYaw -= VELOCITY / 100.0f;
   if (InputHandler::isKeyPressed(GLFW_KEY_RIGHT))
-    yaw += VELOCITY / 100.0f;
+    mYaw += VELOCITY / 100.0f;
+
+  glm::mat4 view = Util::CreateViewMatrix(mPosition, mPitch, mYaw);
+  mRenderer->SetViewMatrix(view);
 }
 
-void Camera::setTarget(float x, float y, float z)
+void Camera::SetTarget(float x, float y, float z)
 {
-  setPosition(glm::vec3(x, y, z));
-  pitch = 0.0f;
-  yaw = 0.0f;
-}
-
-void Camera::setPosition(const glm::vec3 &position)
-{
-  *Camera::position = position;
-}
-
-glm::vec3 *Camera::getPosition() const
-{
-  return position;
-}
-
-float Camera::getPitch() const
-{
-  return pitch;
-}
-
-float Camera::getYaw() const
-{
-  return yaw;
-}
-
-float Camera::getRoll() const
-{
-  return roll;
+  SetPosition(glm::vec3(x, y, z));
+  mPitch = 0.0f;
+  mYaw = 0.0f;
 }

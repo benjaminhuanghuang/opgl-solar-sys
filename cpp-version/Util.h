@@ -14,7 +14,7 @@ namespace Util
 
   glm::mat4 CreateTransformationMatrix(const glm::vec3 &translation, float rx, float ry, float rz, float scale);
   
-  glm::mat4 CreateViewMatrix(glm::vec3 cameraPos, float cameraPitch, float cameraYaw);
+  glm::mat4 CreateViewMatrix(const glm::vec3 &cameraPos, float cameraPitch, float cameraYaw);
   
 
   // Create "Simple" View-Projection Matrix for 2D
